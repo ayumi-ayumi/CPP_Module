@@ -1,20 +1,43 @@
 #include <iostream>
 #include <string>
+#include <cctype>
 
-int main(int ac, char *av[])
+int main(int argc, char *argv[])
 {
-	if (ac == 1)
+	if (argc == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
 	{
-		for (int i = 1; i < ac; i++)
+		for (int i = 1; i < argc; i++)
 		{
-			std::string str = av[i];
-			int len = str.length();
-			for (int j = 0; j < len; j++)
-				std::cout << (char)toupper(str[j]);
+			std::string str = argv[i];
+			size_t len = str.length();
+			std::string result = str;
+			for (size_t j = 0; j < len; j++)
+				result[j] = static_cast<char>(std::toupper(static_cast<unsigned char>(str[j])));
+			std::cout << result;
 		}
 		std::cout << std::endl;
 	}
 	return (0);
 }
+// int main(int argc, char *argv[])
+// {
+// 	if (argc == 1)
+// 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+// 	else
+// 	{
+// 		for (int i = 1; i < argc; i++)
+// 		{
+// 			std::string str = argv[i];
+// 			size_t len = str.length();
+// 			for (size_t j = 0; j < len; j++)
+// 			{
+// 				str[j] = toupper(str[j]);
+// 			}
+// 			std::cout << ch;
+// 		}
+// 		std::cout << std::endl;
+// 	}
+// 	return (0);
+// }
