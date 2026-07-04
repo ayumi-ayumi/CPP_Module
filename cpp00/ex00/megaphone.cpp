@@ -21,23 +21,3 @@ int main(int argc, char *argv[])
 	}
 	return (0);
 }
-// int main(int argc, char *argv[])
-// {
-// 	if (argc == 1)
-// 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-// 	else
-// 	{
-// 		for (int i = 1; i < argc; i++)
-// 		{
-// 			std::string str = argv[i];
-// 			size_t len = str.length();
-// 			for (size_t j = 0; j < len; j++)
-// 			{
-// 				str[j] = toupper(str[j]);
-// 			}
-// 			std::cout << ch;
-// 		}
-// 		std::cout << std::endl;
-// 	}
-// 	return (0);
-// }
