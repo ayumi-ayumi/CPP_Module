@@ -4,14 +4,14 @@
 
 class Contact
 {
-	public:
+	private:
 		unsigned int	index;
 		std::string		firstName;
 		std::string		lastName;
 		std::string		nickName;
 		int				phoneNumber;
 		std::string		darkestSecret;
-		// private:
+	public:
 		Contact(
 			unsigned int index,
 			std::string firstName,
@@ -26,6 +26,6 @@ class Contact
 		nickName(nickName),
 		phoneNumber(phoneNumber),
 		darkestSecret(darkestSecret) {};
-		void displayContact();
+
 };
 #endif
