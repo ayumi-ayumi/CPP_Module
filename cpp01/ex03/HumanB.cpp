@@ -1,5 +1,4 @@
 #include "HumanB.hpp"
-#include <iostream>
 
 HumanB::HumanB(const std::string name) : name(name), m_weapon(NULL){};
 

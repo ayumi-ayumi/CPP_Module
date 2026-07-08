@@ -1,5 +1,4 @@
 #include "HumanA.hpp"
-#include <iostream>
 
 HumanA::HumanA(const std::string name, Weapon &weapon) : name(name), m_weapon(weapon) {};
 
