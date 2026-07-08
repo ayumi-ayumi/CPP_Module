@@ -1,7 +1,7 @@
 #include "Zombie.hpp"
 
 // Constructor, initializing name as name
-Zombie::Zombie(const std::string name) : name(name)
+Zombie::Zombie(const std::string name) : m_name(name)
 {
 	std::cout <<  name << ": Zombie created" << std::endl;
 };
@@ -9,10 +9,10 @@ Zombie::Zombie(const std::string name) : name(name)
 // Destructor
 Zombie::~Zombie()
 {
-	std::cout << name << ": Zombie destroyed" << std::endl;
+	std::cout << m_name << ": Zombie destroyed" << std::endl;
 };
 
 void	Zombie::announce(void)
 {
-	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 };
