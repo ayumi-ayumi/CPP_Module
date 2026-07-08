@@ -1,6 +1,7 @@
-#ifndef _ZOMBIE_H_
-#define _ZOMBIE_H_
+#ifndef _ZOMBIEHORDE_H_
+#define _ZOMBIEHORDE_H_
 #include <string>
+#include <iostream>
 
 class Zombie
 {
@@ -13,5 +14,5 @@ class Zombie
 		std::string m_name;
 };
 
-Zombie* zombieHorde( int N, std::string name );
+Zombie* zombieHorde(int N, std::string name);
 #endif

@@ -1,6 +1,4 @@
 #include "Zombie.hpp"
-#include <iostream>
-#include <string>
 
 // Default constructor
 Zombie::Zombie() : m_name("") 

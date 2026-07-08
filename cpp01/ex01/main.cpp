@@ -2,7 +2,7 @@
 
 int main()
 {
-     Zombie* horde = zombieHorde(5, "Wood");
+     Zombie* horde = zombieHorde(5, "Ayumi");
      if (!horde)
       return (1);
      for (int i = 0; i < 5; i++)
