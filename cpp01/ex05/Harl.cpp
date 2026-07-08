@@ -10,37 +10,30 @@ Harl::Harl()
 
 Harl::~Harl() {};
 
-enum levelType
+static int getIdx(std::string level)
 {
-    debug = 0,
-    info,
-    warning,
-    error,
-    unknown,
-};
-
-levelType getlevelType(const std::string level)
-{
-    if (level == "DEBUG")
-        return debug;
-    if (level == "INFO")
-        return info;
-    if (level == "WARNING")
-        return warning;
-    if (level == "ERROR")
-        return error;
-    return unknown;
+    std::string levelType1[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    int idx = -1;
+    for (int i = 0; i < 4; i++)
+    {
+        if (levelType1[i] == level)
+        {
+            idx = i;
+            break;
+        }
+    }
+    return (idx);
 };
 
 void Harl::complain(std::string level)
 {
-    int levelType = getlevelType(level);
-    if (levelType >= 4)
+    int idx = getIdx(level);
+    if (idx < 0 || idx >= 4)
     {
         std::cout << "|--- Invalid input ---|" << std::endl;
         return;
     }
-    (this->*fs[levelType])();
+    (this->*fs[idx])();
 };
 
 void Harl::debug(void)
