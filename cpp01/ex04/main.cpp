@@ -1,6 +1,22 @@
-#include "handleFile.hpp"
+#include "replace.hpp"
 
 int main()
 {
-    handleFile("sample.txt", "Tokyo", "Berlin");
+    createNewFile("sample.txt", "Tokyo", "Berlin");
 }
+
+/*
+sample.txt
+
+I am living in Tokyo.
+Tokyo is in Germany.
+Have you been to Tokyo?
+
+
+<Permission control>
+- No permission to any users
+chmod a-r file.txt
+
+- Give permission to all
+chmod a+r file.txt
+*/

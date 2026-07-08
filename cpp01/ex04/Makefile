@@ -1,4 +1,4 @@
-NAME = handlefile
+NAME = replace
 
 CXX = clang++
 
@@ -7,7 +7,7 @@ CXXFLAGS =  -Wall -Wextra -Werror -std=c++98
 OBJ_DIR = obj
 
 SRCS = main.cpp \
-		handleFile.cpp
+		replace.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 OBJS = $(addprefix $(OBJ_DIR)/, $(OBJ))

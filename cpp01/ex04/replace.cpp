@@ -1,4 +1,4 @@
-#include "handleFile.hpp"
+#include "replace.hpp"
 
 static std::string replaceStr(std::string &buf, std::string s1, std::string s2)
 {
@@ -8,7 +8,7 @@ static std::string replaceStr(std::string &buf, std::string s1, std::string s2)
     return (temp);
 }
 
-void    handleFile(std::string filename, std::string s1, std::string s2)
+void    createNewFile(std::string filename, std::string s1, std::string s2)
 {
     if (s1 == "" || s2 == "")
     {

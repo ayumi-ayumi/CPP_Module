@@ -4,6 +4,6 @@
 #include <fstream>
 #include <iostream>
 
-void    handleFile(std::string filename, std::string s1, std::string s2);
+void    createNewFile(std::string filename, std::string s1, std::string s2);
 
 #endif
