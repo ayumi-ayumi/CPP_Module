@@ -22,7 +22,12 @@ void    createNewFile(std::string filename, std::string s1, std::string s2)
         std::cerr << "|--- Failed to open a file ---|" << std::endl;
         std::exit(1);
     }
-    
+    if (filein.peek() == EOF) // peek() checks the next char in the input strea,
+    {
+        std::cerr << "|--- File is empty ---|" << std::endl;
+        std::exit(1);
+    }
+
     std::ofstream fileout(filename + ".replace");
     if (!fileout)
     {
