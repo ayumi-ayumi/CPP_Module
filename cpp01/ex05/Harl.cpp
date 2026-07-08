@@ -12,11 +12,11 @@ Harl::~Harl() {};
 
 static int getIdx(std::string level)
 {
-    std::string levelType1[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    std::string levelType[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
     int idx = -1;
     for (int i = 0; i < 4; i++)
     {
-        if (levelType1[i] == level)
+        if (levelType[i] == level)
         {
             idx = i;
             break;
