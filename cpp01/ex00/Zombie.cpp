@@ -1,8 +1,6 @@
 #include "Zombie.hpp"
-#include <iostream>
-#include <string>
 
-// Constructor. initialize m_name as name
+// Constructor, initializing name as name
 Zombie::Zombie(const std::string name) : name(name)
 {
 	std::cout <<  name << ": Zombie created" << std::endl;

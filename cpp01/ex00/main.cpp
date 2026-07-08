@@ -2,10 +2,10 @@
 
 int main()
 {
-    Zombie ayumi("Ayumi_Zombie");
+    Zombie ayumi("AYUMI");
     ayumi.announce();
-    Zombie* tama = newZombie("Tama");
+    Zombie* tama = newZombie("NEW");
     tama->announce();
     delete tama;
-    randomChump("YOLO");
+    randomChump("RANDOM");
 }

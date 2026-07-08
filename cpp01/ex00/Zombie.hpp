@@ -1,6 +1,8 @@
 #ifndef _ZOMBIE_H_
 #define _ZOMBIE_H_
 #include <string>
+#include <iostream>
+#include <string>
 
 class Zombie
 {
@@ -12,7 +14,7 @@ class Zombie
 		std::string name;
 };
 
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
+Zombie* newZombie(std::string name);
+void randomChump(std::string name);
 
 #endif
