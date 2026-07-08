@@ -1,5 +1,5 @@
-#ifndef _HANDLEFILE_H_
-#define _HANDLEFILE_H_
+#ifndef _CREATE_NEW_FILE_H_
+#define _CREATE_NEW_FILE_H_
 #include <string>
 #include <fstream>
 #include <iostream>
