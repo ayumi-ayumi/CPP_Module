@@ -10,32 +10,30 @@ Harl::Harl()
 
 Harl::~Harl() {};
 
-enum levelType
+static int getIdx(std::string level)
 {
-    debug = 0,
-    info,
-    warning,
-    error,
-    unknown,
-};
-
-levelType getlevelType(const std::string level)
-{
-    if (level == "DEBUG")
-        return debug;
-    if (level == "INFO")
-        return info;
-    if (level == "WARNING")
-        return warning;
-    if (level == "ERROR")
-        return error;
-    return unknown;
+    std::string levelType[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+    int idx = -1;
+    for (int i = 0; i < 4; i++)
+    {
+        if (levelType[i] == level)
+        {
+            idx = i;
+            break;
+        }
+    }
+    return (idx);
 };
 
 void Harl::complain(std::string level)
 {
-    int levelType = getlevelType(level);
-    switch (levelType)
+    int idx = getIdx(level);
+    if (idx < 0 || idx >= 4)
+    {
+        std::cout << "|--- Invalid input ---|" << std::endl;
+        return;
+    }
+    switch (idx)
     {
         case 0:
             (this->*fs[0])();
@@ -56,16 +54,19 @@ void Harl::debug(void)
     std::cout << "<<DEBUG>> I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
     std::cout << std::endl;
 };
+
 void Harl::info(void)
 {
     std::cout << "<<INFO>> I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
     std::cout << std::endl;
 };
+
 void Harl::warning(void)
 {
     std::cout << "<<WARNING>> I think I deserve to have some extra bacon for free. I’ve been coming for years, whereas you started working here just last month." << std::endl;
     std::cout << std::endl;
 };
+
 void Harl::error(void)
 {
     std::cout << "<<ERROR>> This is unacceptable! I want to speak to the manager now." << std::endl;
