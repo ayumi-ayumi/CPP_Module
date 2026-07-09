@@ -7,7 +7,6 @@ PhoneBook::PhoneBook()
     fs[0] = &PhoneBook::add_contact;
     fs[1] = &PhoneBook::search_contacts;
     fs[2] = &PhoneBook::exit_contacts;
-    PhoneBook::friends = new Contact[8];
 };
 
 PhoneBook::~PhoneBook() {};
@@ -42,6 +41,5 @@ void PhoneBook::execCommand(std::string cmd)
 
 void PhoneBook::exit_contacts(void)
 {
-     delete[] this->friends;
      exit(1);
 }

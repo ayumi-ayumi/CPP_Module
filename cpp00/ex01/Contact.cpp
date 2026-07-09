@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <stdio.h>
 
-Contact::Contact() : firstName(""), lastName(""), nickName(""), phoneNumber(""), darkestSecret("")  {};
+Contact::Contact() : index(0), id(0), firstName(""), lastName(""), nickName(""), phoneNumber(""), darkestSecret(""){};
 
 Contact::~Contact() {};
 
@@ -28,6 +28,16 @@ void Contact::setField(int field, std::string input)
 	}
 };
 
+void	Contact::setIndex(int index)
+{
+	this->index = index;
+}
+
+void	Contact::setId(int n)
+{
+	this->id = n;
+}
+
 std::string	Contact::getField(std::string field)
 {
 	if (field == "firstName")
@@ -42,3 +52,14 @@ std::string	Contact::getField(std::string field)
         return darkestSecret;
     return "";
 }
+
+int	Contact::getIndex()
+{
+	return index;
+}
+
+int	Contact::getId()
+{
+	return id;
+}
+
