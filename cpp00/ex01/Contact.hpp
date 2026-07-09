@@ -1,31 +1,22 @@
 #ifndef _CONTACT_H_
 #define _CONTACT_H_
 #include <string>
+#include <iostream>
+
+class PhoneBook;
 
 class Contact
 {
+	public:
+		Contact();
+		~Contact();
+		void setField(int field, std::string input);
+		std::string getField(std::string input);
 	private:
-		unsigned int	index;
 		std::string		firstName;
 		std::string		lastName;
 		std::string		nickName;
-		int				phoneNumber;
+		std::string		phoneNumber;
 		std::string		darkestSecret;
-	public:
-		Contact(
-			unsigned int index,
-			std::string firstName,
-			std::string lastName,
-			std::string nickName,
-			int phoneNumber,
-			std::string darkestSecret
-		)
-		: index(index),
-		firstName(firstName),
-		lastName(lastName),
-		nickName(nickName),
-		phoneNumber(phoneNumber),
-		darkestSecret(darkestSecret) {};
-
 };
 #endif

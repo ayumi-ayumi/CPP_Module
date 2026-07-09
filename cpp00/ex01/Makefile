@@ -7,7 +7,10 @@ CXXFLAGS =  -Wall -Wextra -Werror -std=c++98
 OBJ_DIR = obj
 
 SRCS = main.cpp \
-	Contact.cpp
+		PhoneBook.cpp \
+		cmd_add.cpp \
+		cmd_search.cpp \
+		Contact.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 OBJS = $(addprefix $(OBJ_DIR)/, $(OBJ))
