@@ -4,18 +4,18 @@
 #include "Contact.hpp"
 #include <string>
 
-class PhoneBook
+class	PhoneBook
 {
 	public:
 		PhoneBook();
 		~PhoneBook();
-		void run();
+		void	run();
 	private:
-		Contact friends[8];
+		Contact	friends[8];
 		void(PhoneBook::*fs[3])(void);
-		void execCommand(std::string cmd);
-		void add_contact(void);
-		void search_contacts(void);
-		void exit_contacts(void);
+		int		execCommand(std::string cmd);
+		void	add_contact(void);
+		void	search_contacts(void);
+		void	exit_contacts(void);
 };
 #endif

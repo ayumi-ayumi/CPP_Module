@@ -2,11 +2,11 @@
 #include <iomanip>
 #include <stdio.h>
 
-Contact::Contact() : index(0), id(0), firstName(""), lastName(""), nickName(""), phoneNumber(""), darkestSecret(""){};
+Contact::Contact() : index(0), id(0), firstName(""), lastName(""), nickName(""), phoneNumber(""), darkestSecret("") {};
 
 Contact::~Contact() {};
 
-void Contact::setField(int field, std::string input)
+void	Contact::setField(int field, std::string input)
 {
 	switch (field)
 	{
@@ -26,7 +26,7 @@ void Contact::setField(int field, std::string input)
 			this->darkestSecret = input;
 			break;
 	}
-};
+}
 
 void	Contact::setIndex(int index)
 {
@@ -41,16 +41,16 @@ void	Contact::setId(int n)
 std::string	Contact::getField(std::string field)
 {
 	if (field == "firstName")
-        return firstName;
-    if (field == "lastName")
-        return lastName;
-    if (field == "nickName")
-        return nickName;
-    if (field == "phoneNumber")
-        return phoneNumber;
-    if (field == "darkestSecret")
-        return darkestSecret;
-    return "";
+		return firstName;
+	if (field == "lastName")
+		return lastName;
+	if (field == "nickName")
+		return nickName;
+	if (field == "phoneNumber")
+		return phoneNumber;
+	if (field == "darkestSecret")
+		return darkestSecret;
+	return "";
 }
 
 int	Contact::getIndex()
@@ -62,4 +62,3 @@ int	Contact::getId()
 {
 	return id;
 }
-
