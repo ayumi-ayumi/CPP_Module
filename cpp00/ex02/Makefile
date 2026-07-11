@@ -1,4 +1,4 @@
-NAME = replace
+NAME = account
 
 CXX = c++
 
@@ -6,8 +6,8 @@ CXXFLAGS =  -Wall -Wextra -Werror -std=c++98
 
 OBJ_DIR = obj
 
-SRCS = main.cpp \
-		replace.cpp
+SRCS = tests.cpp \
+		Account.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 OBJS = $(addprefix $(OBJ_DIR)/, $(OBJ))
