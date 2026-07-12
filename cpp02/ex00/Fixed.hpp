@@ -1,5 +1,6 @@
 #ifndef _FIXED_H_
 #define _FIXED_H_
+
 class Fixed {
 	public:
 		Fixed();
@@ -9,7 +10,7 @@ class Fixed {
 		int					getRawBits(void) const;
 		void				setRawBits(int const raw);
 	private:
-		int					fixed_point;
+		int					fixed_point_nbr;
 		static const int	bits = 8;
 };
 
