@@ -10,8 +10,8 @@ class Fixed {
 		int					getRawBits(void) const;
 		void				setRawBits(int const raw);
 	private:
-		int					fixed_point_nbr;
-		static const int	bits = 8;
+		int					_fixed_point_nbr_value;
+		static const int	_fractionalBits = 8;
 };
 
 
