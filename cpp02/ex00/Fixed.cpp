@@ -3,37 +3,80 @@
 
 Fixed::Fixed() : fixed_point(0)
 {
-    std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 };
 
-Fixed::Fixed(const Fixed& rhs) 
+Fixed::Fixed(const Fixed& rhs)
 {
-    std::cout << "Copy constructor called" << std::endl;
-    fixed_point = rhs.fixed_point;
+	std::cout << "Copy constructor called" << std::endl;
+	*this = rhs;
 };
 
-Fixed& Fixed::operator=(const Fixed& rhs) 
+Fixed& Fixed::operator=(const Fixed& rhs)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
-    if (this != &rhs)
-    {
-        fixed_point = rhs.fixed_point;
-    }
-    return (*this);
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &rhs)
+	{
+		fixed_point = rhs.getRawBits();
+	}
+	return (*this);
 };
 
-Fixed::~Fixed() 
+Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 };
 
 int Fixed::getRawBits(void) const
 {
-    std::cout << "getRawBits member function called" << std::endl;
-    return (fixed_point);
+	std::cout << "getRawBits member function called" << std::endl;
+	return (fixed_point);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-    fixed_point = raw;
+	fixed_point = raw;
 }
+
+
+/*
+Test code
+
+Fixed::Fixed(std::string name) : fixed_point(0)
+{
+	m_name = name;
+	std::cout << m_name <<": Default constructor called" << std::endl;
+};
+
+Fixed::Fixed(const Fixed& rhs)
+{
+	std::cout << m_name << ": Copy constructor called" << std::endl;
+	*this = rhs;
+};
+
+Fixed& Fixed::operator=(const Fixed& rhs)
+{
+	std::cout << m_name << ": Copy assignment operator called" << std::endl;
+	if (this != &rhs)
+	{
+		fixed_point = rhs.getRawBits();
+	}
+	return (*this);
+};
+
+Fixed::~Fixed()
+{
+	std::cout << "Destructor called" << std::endl;
+};
+
+int Fixed::getRawBits(void) const
+{
+	std::cout <<m_name << ": getRawBits member function called" << std::endl;
+	return (fixed_point);
+}
+
+void Fixed::setRawBits(int const raw)
+{
+	fixed_point = raw;
+}
+*/
