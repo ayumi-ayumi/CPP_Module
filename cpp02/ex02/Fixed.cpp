@@ -30,10 +30,28 @@ Fixed &Fixed::operator=(const Fixed& rhs)
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
-		_fixed_point_nbr_value = rhs.getRawBits();
+		_fixed_point_nbr_value = rhs._fixed_point_nbr_value;
 	}
 	return (*this);
 };
+
+bool Fixed::operator==(const Fixed& rhs)
+{
+	return _fixed_point_nbr_value == rhs._fixed_point_nbr_value;
+};
+
+bool Fixed::operator!=(const Fixed& rhs)
+{
+	return !(*this == rhs);
+};
+
+// const Fixed Fixed::operator+(const Fixed& rhs) const
+// {
+// 	Fixed temp;
+// 	temp._fixed_point_nbr_value = _fixed_point_nbr_value + rhs._fixed_point_nbr_value;
+// 	return temp;
+// }
+
 
 std::ostream& operator<<(std::ostream &out, const Fixed& rhs)
 {

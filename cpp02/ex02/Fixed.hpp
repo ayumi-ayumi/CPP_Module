@@ -9,13 +9,16 @@ class Fixed {
 		Fixed(const float nbr);
 		Fixed(const Fixed& rhs);
 		Fixed& operator=(const Fixed& rhs);
+
 		Fixed& operator>(const Fixed& rhs);
 		Fixed& operator<(const Fixed& rhs);
 		Fixed& operator>=(const Fixed& rhs);
 		Fixed& operator<=(const Fixed& rhs);
-		Fixed& operator==(const Fixed& rhs);
-		Fixed& operator!=(const Fixed& rhs);
-		Fixed& operator+(const Fixed& rhs);
+
+		bool operator==(const Fixed& rhs);
+		bool operator!=(const Fixed& rhs);
+
+		const Fixed operator+(const Fixed& rhs) const;
 		Fixed& operator-(const Fixed& rhs);
 		Fixed& operator*(const Fixed& rhs);
 		Fixed& operator/(const Fixed& rhs);
