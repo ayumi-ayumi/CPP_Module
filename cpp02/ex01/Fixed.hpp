@@ -10,12 +10,13 @@ class Fixed {
 		Fixed(const Fixed& rhs);
 		Fixed& operator=(const Fixed& rhs);
 		~Fixed();
+		
 		int					getRawBits(void) const;
 		void				setRawBits(int const raw);
 		float				toFloat(void) const;
 		int					toInt(void) const;
 	private:
-		int					_fixed_point_nbr_value;
+		int					_rawValue;
 		static const int	_fractionalBits = 8;
 };
 
