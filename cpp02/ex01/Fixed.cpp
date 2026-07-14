@@ -16,7 +16,7 @@ Fixed::Fixed(const int nbr)
 Fixed::Fixed(const float nbr)
 {
 	std::cout << "Float constructor called" << std::endl;
-	_rawValue = roundf(nbr * (1 << _fractionalBits));
+	_rawValue = (int)roundf(nbr * (1 << _fractionalBits));
 };
 
 Fixed::Fixed(const Fixed& rhs)
