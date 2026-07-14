@@ -1,7 +1,7 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-Fixed::Fixed() : _fixed_point_nbr_value(0)
+Fixed::Fixed() : _rawValue(0)
 {
 	std::cout << "Default constructor called" << std::endl;
 };
@@ -16,9 +16,7 @@ Fixed& Fixed::operator=(const Fixed& rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
-	{
-		_fixed_point_nbr_value = rhs.getRawBits();
-	}
+		_rawValue = rhs.getRawBits(); // [OK]_rawValue = rhs._rawValue
 	return (*this);
 };
 
@@ -30,18 +28,18 @@ Fixed::~Fixed()
 int Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	return (_fixed_point_nbr_value);
+	return (_rawValue);
 };
 
 void Fixed::setRawBits(int const raw)
 {
-	_fixed_point_nbr_value = raw;
+	_rawValue = raw;
 };
 
 /*
 Test code
 
-Fixed::Fixed(std::string name) : _fixed_point_nbr_value(0)
+Fixed::Fixed(std::string name) : _rawValue(0)
 {
 	m_name = name;
 	std::cout << m_name <<": Default constructor called" << std::endl;
@@ -58,7 +56,7 @@ Fixed& Fixed::operator=(const Fixed& rhs)
 	std::cout << m_name << ": Copy assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
-		_fixed_point_nbr_value = rhs.getRawBits();
+		_rawValue = rhs.getRawBits();
 	}
 	return (*this);
 };
@@ -71,11 +69,11 @@ Fixed::~Fixed()
 int Fixed::getRawBits(void) const
 {
 	std::cout <<m_name << ": getRawBits member function called" << std::endl;
-	return (_fixed_point_nbr_value);
+	return (_rawValue);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	_fixed_point_nbr_value = raw;
+	_rawValue = raw;
 }
 */

@@ -4,9 +4,9 @@
 int main( void )
 {
 	Fixed a;
-	Fixed b(a);
+	Fixed b(a); // Copy constructor
 	Fixed c;
-	c = b;
+	c = b; //c.operator=(b)
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
@@ -17,7 +17,7 @@ int main( void )
 [Fixed a;]Default constructor called
 [Fixed b(a);]Copy constructor called
 [Fixed b(a);]Copy assignment operator called // <-- This line may be missing depending on your implementation
-[operator=]getRawBits member function called
+[Fixed b(a);]getRawBits member function called
 [Fixed c]Default constructor called
 [c=b]Copy assignment operator called
 [c=b]getRawBits member function called
