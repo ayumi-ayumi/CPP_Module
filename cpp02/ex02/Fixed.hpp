@@ -9,30 +9,37 @@ class Fixed {
 		Fixed(const float nbr);
 		Fixed(const Fixed& rhs);
 		Fixed& operator=(const Fixed& rhs);
-
-		Fixed& operator>(const Fixed& rhs);
-		Fixed& operator<(const Fixed& rhs);
-		Fixed& operator>=(const Fixed& rhs);
-		Fixed& operator<=(const Fixed& rhs);
-
-		bool operator==(const Fixed& rhs);
-		bool operator!=(const Fixed& rhs);
-
-		const Fixed operator+(const Fixed& rhs) const;
-		Fixed& operator-(const Fixed& rhs);
-		Fixed& operator*(const Fixed& rhs);
-		Fixed& operator/(const Fixed& rhs);
-		Fixed& operator++(const Fixed& rhs);
-		Fixed& operator--(const Fixed& rhs);
-		Fixed operator++(const Fixed& rhs, int n);
-		Fixed operator--(const Fixed& rhs, int n);
 		~Fixed();
+
+		bool				operator<(const Fixed& rhs);
+		bool				operator>(const Fixed& rhs);
+		bool				operator>=(const Fixed& rhs);
+		bool				operator<=(const Fixed& rhs);
+
+		bool				operator==(const Fixed& rhs);
+		bool				operator!=(const Fixed& rhs);
+
+		Fixed				operator+(const Fixed& rhs) const;
+		Fixed				operator-(const Fixed& rhs) const;
+		Fixed				operator*(const Fixed& rhs) const;
+		Fixed				operator/(const Fixed& rhs) const;
+
+		Fixed& 				operator++(); // ++a
+		Fixed&				operator--(); // --a
+		Fixed				operator++(int); // a++
+		Fixed				operator--(int); // a--
+
 		int					getRawBits(void) const;
 		void				setRawBits(int const raw);
 		float				toFloat(void) const;
 		int					toInt(void) const;
+
+		static float			min(Fixed& lhs, Fixed& rhs);
+		static float			max(Fixed& lhs, Fixed& rhs);
+		static float			min(const Fixed& lhs, const Fixed& rhs);
+		static float			max(const Fixed& lhs, const Fixed& rhs);
 	private:
-		int					_fixed_point_nbr_value;
+		int					_rawValue;
 		static const int	_fractionalBits = 8;
 };
 
