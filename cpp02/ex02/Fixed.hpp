@@ -34,10 +34,10 @@ class Fixed {
 		float				toFloat(void) const;
 		int					toInt(void) const;
 
-		static float			min(Fixed& lhs, Fixed& rhs);
-		static float			max(Fixed& lhs, Fixed& rhs);
-		static float			min(const Fixed& lhs, const Fixed& rhs);
-		static float			max(const Fixed& lhs, const Fixed& rhs);
+		static Fixed&		min(Fixed& lhs, Fixed& rhs);
+		static Fixed&		max(Fixed& lhs, Fixed& rhs);
+		static const Fixed&		min(const Fixed& lhs, const Fixed& rhs);
+		static const Fixed&		max(const Fixed& lhs, const Fixed& rhs);
 	private:
 		int					_rawValue;
 		static const int	_fractionalBits = 8;

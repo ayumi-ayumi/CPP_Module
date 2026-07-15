@@ -1,9 +1,6 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-#include "Fixed.hpp"
-#include <iostream>
-
 int main(void)
 {
 	std::cout << "========== COMPARISON OPERATORS ==========\n";
