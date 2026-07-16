@@ -18,4 +18,5 @@ class	PhoneBook
 		void	search_contacts(void);
 		void	exit_contacts(void);
 };
+
 #endif

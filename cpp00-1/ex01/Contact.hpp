@@ -25,4 +25,5 @@ class	Contact
 		std::string		phoneNumber;
 		std::string		darkestSecret;
 };
+
 #endif

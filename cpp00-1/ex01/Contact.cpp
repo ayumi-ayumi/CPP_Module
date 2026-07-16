@@ -1,44 +1,51 @@
 #include "Contact.hpp"
 #include <iomanip>
-#include <stdio.h>
 
-Contact::Contact() : index(0), id(0), firstName(""), lastName(""), nickName(""), phoneNumber(""), darkestSecret("") {};
+Contact::Contact()
+	: index(0),
+	id(0),
+	firstName(""),
+	lastName(""),
+	nickName(""),
+	phoneNumber(""),
+	darkestSecret("")
+	{};
 
 Contact::~Contact() {};
 
-void	Contact::setField(int field, std::string input)
+void Contact::setField(int field, std::string input)
 {
 	switch (field)
 	{
-		case 0:
-			this->firstName = input;
-			break;
-		case 1:
-			this->lastName = input;
-			break;
-		case 2:
-			this->nickName = input;
-			break;
-		case 3:
-			this->phoneNumber = input;
-			break;
-		case 4:
-			this->darkestSecret = input;
-			break;
+	case 0:
+		this->firstName = input;
+		break;
+	case 1:
+		this->lastName = input;
+		break;
+	case 2:
+		this->nickName = input;
+		break;
+	case 3:
+		this->phoneNumber = input;
+		break;
+	case 4:
+		this->darkestSecret = input;
+		break;
 	}
 }
 
-void	Contact::setIndex(int index)
+void Contact::setIndex(int index)
 {
 	this->index = index;
 }
 
-void	Contact::setId(int n)
+void Contact::setId(int n)
 {
 	this->id = n;
 }
 
-std::string	Contact::getField(std::string field)
+std::string Contact::getField(std::string field)
 {
 	if (field == "firstName")
 		return firstName;
@@ -53,12 +60,12 @@ std::string	Contact::getField(std::string field)
 	return "";
 }
 
-int	Contact::getIndex()
+int Contact::getIndex()
 {
 	return index;
 }
 
-int	Contact::getId()
+int Contact::getId()
 {
 	return id;
 }
