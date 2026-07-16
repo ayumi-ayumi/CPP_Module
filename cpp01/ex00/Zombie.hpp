@@ -2,7 +2,6 @@
 #define _ZOMBIE_H_
 #include <string>
 #include <iostream>
-#include <string>
 
 class Zombie
 {
@@ -11,7 +10,7 @@ class Zombie
 		~Zombie();
 		void announce(void);
 	private:
-		std::string m_name;
+		std::string _name;
 };
 
 Zombie* newZombie(std::string name);
