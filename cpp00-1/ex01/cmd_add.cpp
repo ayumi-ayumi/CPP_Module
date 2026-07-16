@@ -1,7 +1,5 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
-#include <iostream>
-#include <string>
 
 static void	find_spot_and_id(Contact friends[], int &index, int &id)
 {

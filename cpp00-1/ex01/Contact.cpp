@@ -1,5 +1,4 @@
 #include "Contact.hpp"
-#include <iomanip>
 
 Contact::Contact()
 	: index(0),
