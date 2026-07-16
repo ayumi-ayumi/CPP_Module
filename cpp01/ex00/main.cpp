@@ -8,4 +8,4 @@ int main()
 	newbie->announce();
 	delete newbie;
 	randomChump("RANDOM");
-}
+};
