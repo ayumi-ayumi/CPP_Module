@@ -1,4 +1,4 @@
-NAME = zombieHorde
+NAME = zombie
 
 CXX = c++
 
