@@ -1,4 +1,5 @@
 #include "Zombie.hpp"
+#include <iostream>
 
 // Default constructor
 Zombie::Zombie() : _name("")
