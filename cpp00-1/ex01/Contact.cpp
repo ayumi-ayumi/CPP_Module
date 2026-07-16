@@ -56,15 +56,15 @@ std::string Contact::getField(std::string field)
 		return phoneNumber;
 	if (field == "darkestSecret")
 		return darkestSecret;
-	return "";
+	return ("");
 }
 
 int Contact::getIndex()
 {
-	return index;
+	return (index);
 }
 
 int Contact::getId()
 {
-	return id;
+	return (id);
 }
