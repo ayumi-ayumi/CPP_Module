@@ -1,14 +1,9 @@
 #include "HumanB.hpp"
 #include <iostream>
 
-HumanB::HumanB(const std::string name) : _name(name), _weapon(NULL) {
-	std::cout <<  name << ": B created" << std::endl;
-};
+HumanB::HumanB(const std::string name) : _name(name), _weapon(NULL) {};
 
-HumanB::~HumanB() {
-	std::cout <<  "B destroyed" << std::endl;
-
-};
+HumanB::~HumanB() {};
 
 void HumanB::setWeapon(Weapon &weapon)
 {
@@ -18,6 +13,6 @@ void HumanB::setWeapon(Weapon &weapon)
 void HumanB::attack()
 {
 	if (_weapon)
-		std::cout << _name << " attacks with their " << _weapon->getType() << std::endl;
+		std::cout << _weapon << " attacks with their " << _weapon->getType() << std::endl;
 	return ;
 };
