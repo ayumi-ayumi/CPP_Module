@@ -9,10 +9,12 @@ class Point {
 		Point(const Point& rhs);
 		Point& operator=(const Point& rhs);
 		~Point();
-		float getX() const;
-		float getY() const;
+
+		float		getX() const;
+		float		getY() const;
 	private:
-		const Fixed _x;
-		const Fixed _y;
+		const Fixed	_x;
+		const Fixed	_y;
 };
+
 #endif
