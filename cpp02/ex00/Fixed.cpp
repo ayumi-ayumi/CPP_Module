@@ -41,19 +41,19 @@ Test code
 
 Fixed::Fixed(std::string name) : _rawValue(0)
 {
-	m_name = name;
-	std::cout << m_name <<": Default constructor called" << std::endl;
+	_name = name;
+	std::cout << _name <<": Default constructor called" << std::endl;
 };
 
 Fixed::Fixed(const Fixed& rhs)
 {
-	std::cout << m_name << ": Copy constructor called" << std::endl;
+	std::cout << _name << ": Copy constructor called" << std::endl;
 	*this = rhs;
 };
 
 Fixed& Fixed::operator=(const Fixed& rhs)
 {
-	std::cout << m_name << ": Copy assignment operator called" << std::endl;
+	std::cout << _name << ": Copy assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
 		_rawValue = rhs.getRawBits();
@@ -68,7 +68,7 @@ Fixed::~Fixed()
 
 int Fixed::getRawBits(void) const
 {
-	std::cout <<m_name << ": getRawBits member function called" << std::endl;
+	std::cout <<_name << ": getRawBits member function called" << std::endl;
 	return (_rawValue);
 }
 

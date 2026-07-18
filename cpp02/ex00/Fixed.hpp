@@ -32,7 +32,7 @@ class Fixed {
 	private:
 		int					fixed_point;
 		static const int	bits = 8;
-		std::string			m_name;
+		std::string			_name;
 };
 
 */
