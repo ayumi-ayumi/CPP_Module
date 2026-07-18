@@ -16,7 +16,7 @@ Fixed::Fixed(const int nbr)
 Fixed::Fixed(const float nbr)
 {
 	std::cout << "Float constructor called" << std::endl;
-	_rawValue = (int)roundf(nbr * (1 << _fractionalBits));
+	_rawValue = static_cast<int>(roundf(nbr * (1 << _fractionalBits)));
 };
 
 Fixed::Fixed(const Fixed& rhs)
@@ -55,7 +55,7 @@ float Fixed::toFloat(void) const
 
 int Fixed::toInt(void) const
 {
-	return ( _rawValue >> _fractionalBits); // _rawValue / 2^8
+	return (static_cast<int>(_rawValue >> _fractionalBits)); // _rawValue / 2^8
 };
 
 std::ostream& operator<<(std::ostream &out, const Fixed& rhs)
