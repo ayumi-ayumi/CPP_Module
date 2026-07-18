@@ -4,7 +4,7 @@
 // Constructor, initializing _name as name
 Zombie::Zombie(const std::string name) : _name(name)
 {
-	std::cout <<  name << ": Zombie created" << std::endl;
+	std::cout << name << ": Zombie created" << std::endl;
 };
 
 // Destructor
