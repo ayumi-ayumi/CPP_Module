@@ -48,7 +48,7 @@ int main(void)
 	std::cout << "5 / 2 = " << Fixed(5) / Fixed(2) << std::endl;
 	std::cout << "-10 / 2 = " << Fixed(-10) / Fixed(2) << std::endl;
 	std::cout << "123.45 / 1 = " << Fixed(123.45f) / Fixed(1) << std::endl;
-	// std::cout << "10 / 0 = " << Fixed(10) / Fixed(0) << std::endl;
+	std::cout << "10 / 0 = " << Fixed(10) / Fixed(0) << std::endl;
 	std::cout << std::endl;
 
 
