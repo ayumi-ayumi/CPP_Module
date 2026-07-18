@@ -2,7 +2,7 @@
 
 int main()
 {
-    createNewFile("sample.txt", "Tokyo", "Berlin");
+	createNewFile("sample.txt", "Tokyo", "Berlin");
 }
 
 /*
@@ -15,8 +15,8 @@ Have you been to Tokyo?
 
 <Permission control>
 - No permission to any users
-chmod a-r file.txt
+chmod a-r sample.txt
 
 - Give permission to all
-chmod a+r file.txt
+chmod a+r sample.txt
 */
