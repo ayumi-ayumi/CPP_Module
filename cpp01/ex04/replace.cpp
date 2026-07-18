@@ -3,12 +3,17 @@
 #include <iostream>
 #include <cstdlib>
 
-static	std::string replaceStr(std::string &buf, std::string s1, std::string s2)
+static void replaceStr(std::string &buf, std::string s1, std::string s2)
 {
-	size_t pos = buf.find(s1);
-	std::string temp = buf.erase(pos, s1.length());
-	temp.insert(pos, s2);
-	return (temp);
+	size_t pos = 0;
+	while (1)
+	{
+		pos = buf.find(s1, pos);
+		if (pos == std::string::npos) break; // npos indicates "not found"
+		buf.erase(pos, s1.length());
+		buf.insert(pos, s2);
+		pos += s1.length();
+	}
 }
 
 void	createNewFile(std::string filename, std::string s1, std::string s2)
@@ -19,7 +24,7 @@ void	createNewFile(std::string filename, std::string s1, std::string s2)
 		std::exit(1);
 	}
 
-	std::ifstream filein(filename.c_str()); // c_str() changes the string to char *
+	std::ifstream filein(filename.c_str()); // c_str() changes a string to char *
 	if (!filein)
 	{
 		std::cerr << "|--- Failed to open a file ---|" << std::endl;
@@ -35,18 +40,18 @@ void	createNewFile(std::string filename, std::string s1, std::string s2)
 	std::ofstream fileout(outputFileName.c_str());
 	if (!fileout)
 	{
-		std::cerr << "|--- Failed to open a file ---|" << std::endl;
+		std::cerr << "|--- Failed to create a file ---|" << std::endl;
 		std::exit(1);
 	}
 
 	std::string buf;
 	while (getline(filein, buf))
 	{
-		std::string temp = replaceStr(buf, s1, s2);
+		replaceStr(buf, s1, s2);
 		if (!filein.eof())
-			fileout << temp << std::endl;
+			fileout << buf << std::endl;
 		else
-			fileout << temp;
+			fileout << buf;
 	}
 
 	if (filein.eof())
