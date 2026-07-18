@@ -16,7 +16,7 @@ Fixed& Fixed::operator=(const Fixed& rhs)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
-		_rawValue = rhs.getRawBits(); // [OK]_rawValue = rhs._rawValue
+		_rawValue = rhs.getRawBits(); // [OK]_rawValue = rhs._rawValue. Use getRawBits() to output the same as the subject
 	return (*this);
 };
 
