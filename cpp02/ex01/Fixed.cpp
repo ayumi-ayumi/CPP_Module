@@ -10,7 +10,7 @@ Fixed::Fixed() : _rawValue(0)
 Fixed::Fixed(const int nbr)
 {
 	std::cout << "Int constructor called" << std::endl;
-	_rawValue = nbr * (1 << _fractionalBits);
+	_rawValue = nbr * (1 << _fractionalBits); // Shift 8 bits to the left (2^8) = 256
 };
 
 Fixed::Fixed(const float nbr)
@@ -48,14 +48,14 @@ void Fixed::setRawBits(int const raw)
 	_rawValue = raw;
 };
 
-float Fixed::toFloat( void ) const
+float Fixed::toFloat(void) const
 {
-	return(static_cast<float>(_rawValue / (1 << _fractionalBits)));
+	return (_rawValue / static_cast<float>(1 << _fractionalBits));
 };
 
-int Fixed::toInt( void ) const
+int Fixed::toInt(void) const
 {
-	return ( _rawValue >> _fractionalBits);
+	return ( _rawValue >> _fractionalBits); // _rawValue / 2^8
 };
 
 std::ostream& operator<<(std::ostream &out, const Fixed& rhs)
