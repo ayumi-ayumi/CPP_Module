@@ -1,4 +1,4 @@
-NAME = claptrap
+NAME = scavtrap
 
 CXX = c++
 
@@ -7,7 +7,8 @@ CXXFLAGS =  -Wall -Wextra -Werror -std=c++98
 OBJ_DIR = obj
 
 SRCS = main.cpp \
-		ClapTrap.cpp
+		ClapTrap.cpp \
+		ScavTrap.cpp \
 
 OBJ = $(SRCS:.cpp=.o)
 OBJS = $(addprefix $(OBJ_DIR)/, $(OBJ))
