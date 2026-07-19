@@ -4,7 +4,7 @@
 Point sub_vec(const Point& a, const Point& b)
 {
 	return (Point(a.getX() - b.getX(), a.getY() - b.getY()));
-};
+}
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
@@ -26,4 +26,4 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 	if ((cross1 > 0 && cross2 > 0 && cross3 > 0) || (cross1 < 0 && cross2 < 0 && cross3 < 0))
 		return (true);
 	return (false);
-};
+}
