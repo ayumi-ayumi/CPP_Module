@@ -1,40 +1,101 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
-int main(void) {
-    std::cout << "========= 1. INITIALIZATION =========" << std::endl;
-    ScavTrap scav("Scavvy"); // Scavvy: [HP: 100] [EP: 50]
-    ClapTrap clap("Clappy"); // Clappy: [HP:  10] [EP: 10]
-    std::cout << std::endl;
+int main() {
+    std::cout << "========== 1. Constructor / Destructor Chain ==========" << std::endl;
+    {
+        std::cout << "--- Creating FragTrap ---" << std::endl;
+        // Check if constructors are called in order: ClapTrap -> FragTrap
+        FragTrap frag("Fraggy");
 
-    std::cout << "========= 2. COMBAT FLOW =========" << std::endl;
+        std::cout << "\n--- Status Check ---" << std::endl;
+        // Specifications: HP: 100, EP: 100, AD: 30
+        frag.attack("Target Dummy");
+        frag.takeDamage(40);
+        frag.beRepaired(20);
 
-    // Scavvy attacks: Costs 1 Energy Point
-    scav.attack("Clappy");   // Scavvy: [HP: 100] [EP: 49]
+        std::cout << "\n--- Special Ability Check ---" << std::endl;
+        frag.highFivesGuys();
 
-    // Clappy takes 20 damage: Drops from 10 HP to 0 HP (Dead)
-    clap.takeDamage(20);     // Clappy: [HP:   0] [EP: 10]
-    std::cout << std::endl;
+        std::cout << "\n--- Destroying FragTrap ---" << std::endl;
+        // Check if destructors are called in reverse order: FragTrap -> ClapTrap
+    }
 
-    std::cout << "========= 3. DEAD OBJECT FLOW =========" << std::endl;
+    std::cout << "\n========== 2. Copy Semantics & Assignment ==========" << std::endl;
+    {
+        FragTrap original("Original");
+        std::cout << "--- Copy Constructor ---" << std::endl;
+        FragTrap copy(original);
 
-    // Clappy has 0 HP, so actions fail. No Energy points should be spent!
-    clap.attack("Scavvy");   // Clappy: [HP:   0] [EP: 10] (Fails to attack)
-    clap.beRepaired(10);     // Clappy: [HP:   0] [EP: 10] (Fails to repair)
-    std::cout << std::endl;
+        std::cout << "--- Assignment Operator ---" << std::endl;
+        FragTrap assign("Assignee");
+        assign = original;
 
-    std::cout << "========= 4. REPAIR FLOW =========" << std::endl;
+        std::cout << "--- Testing Actions on Copied Object ---" << std::endl;
+        copy.highFivesGuys();
+    }
 
-    // Scavvy repairs: Costs 1 Energy Point, recovers 15 HP
-    scav.beRepaired(15);     // Scavvy: [HP: 115] [EP: 48]
-    std::cout << std::endl;
+    std::cout << "\n========== 3. Resource Depletion & Death ==========" << std::endl;
+    {
+        FragTrap heavy("Heavy");
 
-    std::cout << "========= 5. SPECIAL ABILITY =========" << std::endl;
-    scav.guardGate();        // Scavvy: [HP: 115] [EP: 48]
-    std::cout << std::endl;
+        std::cout << "--- Taking Lethal Damage ---" << std::endl;
+        heavy.takeDamage(120); // HP drops to 0
 
-    std::cout << "========= 6. DESTRUCTOR CHAINING =========" << std::endl;
-    // Objects leave scope: ScavTrap destructor fires first, then ClapTrap base.
+        std::cout << "--- Action Checks While Dead ---" << std::endl;
+        heavy.attack("Ghost");
+        heavy.beRepaired(10);
+        heavy.highFivesGuys(); // Should fail or show dead state based on your design
+    }
+
     return 0;
 }
+
+/*
+========== 1. Constructor / Destructor Chain ==========
+--- Creating FragTrap ---
+ClapTrap Fraggy created!
+FragTrap Fraggy created!
+
+--- Status Check ---
+FragTrap Fraggy attacks Target Dummy, causing 30 points of damage!
+FragTrap Fraggy takes 40 points of damage!
+FragTrap Fraggy repairs itself, recovering 20 hit points!
+
+--- Special Ability Check ---
+FragTrap Fraggy requests a positive high five! 🙌 Give me five, guys!
+
+--- Destroying FragTrap ---
+FragTrap Fraggy destroyed!
+ClapTrap Fraggy destroyed!
+
+========== 2. Copy Semantics & Assignment ==========
+ClapTrap Original created!
+FragTrap Original created!
+--- Copy Constructor ---
+FragTrap Copy constructor called for Original
+--- Assignment Operator ---
+ClapTrap Assignee created!
+FragTrap Assignee created!
+FragTrap Copy assignment operator called
+--- Testing Actions on Copied Object ---
+FragTrap Original requests a positive high five! 🙌 Give me five, guys!
+FragTrap Original destroyed!
+ClapTrap Original destroyed!
+FragTrap Original destroyed!
+ClapTrap Original destroyed!
+
+========== 3. Resource Depletion & Death ==========
+ClapTrap Heavy created!
+FragTrap Heavy created!
+--- Taking Lethal Damage ---
+FragTrap Heavy takes 120 points of damage!
+FragTrap Heavy is dead!
+--- Action Checks While Dead ---
+FragTrap Heavy cannot attack because they have no hit points left!
+FragTrap Heavy cannot repair itself because they have no hit points left!
+FragTrap Heavy requests a high five... but nobody responds to a corpse.
+FragTrap Heavy destroyed!
+ClapTrap Heavy destroyed!
+
+*/
