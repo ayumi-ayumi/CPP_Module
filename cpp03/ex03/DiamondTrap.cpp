@@ -1,32 +1,27 @@
 #include "DiamondTrap.hpp"
 #include <iostream>
 
-DiamondTrap::DiamondTrap() : FragTrap(), ScavTrap()
+DiamondTrap::DiamondTrap() : ClapTrap(), FragTrap(), ScavTrap(), _name("")
 {
 	std::cout << "DiamondTrap default constructor created" << std::endl;
 	this->_hitPoints = 100;
-	this->_energyPoints = 100;
+	this->_energyPoints = 50;
 	this->_attackDamage = 30;
 }
 
-// Constructor with a parameter
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name)
+// Parameterized constructor
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name), _name(name)
 {
 	std::cout << "DiamondTrap " << name << " created" << std::endl;
-	this->_name = ClapTrap::_name;
-	this->_hitPoints = FragTrap::_hitPoints;
-	this->_energyPoints = ScavTrap::_energyPoints;
-	this->_attackDamage = FragTrap::_attackDamage;
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 30;
 }
 
 // Copy constructor
-DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), FragTrap(other), ScavTrap(other), _name(other._name)
 {
 	std::cout << "DiamondTrap copy constructor created" << std::endl;
-	this->_name = _name;
-	this->_hitPoints = other._hitPoints;
-	this->_energyPoints = other._energyPoints;
-	this->_attackDamage = other._attackDamage;
 }
 
 // Copy assignment operator
@@ -35,10 +30,10 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 	std::cout << "DiamondTrap a copy assignment operator constructor created" << std::endl;
 	if (this != &other) // Check if you do not assign yourself (a = a;)
 	{
-		_name = other._name;
-		_hitPoints = other._hitPoints;
-		_energyPoints = other._energyPoints;
-		_attackDamage = other._attackDamage;
+		ClapTrap::operator=(other);
+		FragTrap::operator=(other);
+		ScavTrap::operator=(other);
+		this->_name = other._name;
 	}
 	return (*this);
 }
@@ -56,6 +51,5 @@ void DiamondTrap::attack(const std::string& target)
 
 void DiamondTrap::whoAmI()
 {
-	std::cout << "DiamondTrap: " << _name << "ClapTrap: "<< ClapTrap::_name << std::endl;
-
+	std::cout << "DiamondTrap: " << _name << " --- ClapTrap: "<< ClapTrap::_name << std::endl;
 }
