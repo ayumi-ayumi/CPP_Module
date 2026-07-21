@@ -23,9 +23,6 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
 	std::cout << "ScavTrap copy constructor created" << std::endl;
-	// this->_hitPoints = other._hitPoints;
-	// this->_energyPoints = other._energyPoints;
-	// this->_attackDamage = other._attackDamage;
 }
 
 // Copy assignment operator
@@ -33,13 +30,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 {
 	std::cout << "ScavTrap a copy assignment operator constructor created" << std::endl;
 	if (this != &other) // Check if you do not assign yourself (a = a;)
-	{
 		ClapTrap::operator=(other);
-		// _name = other._name;
-		// _hitPoints = other._hitPoints;
-		// _energyPoints = other._energyPoints;
-		// _attackDamage = other._attackDamage;
-	}
 	return (*this);
 }
 
