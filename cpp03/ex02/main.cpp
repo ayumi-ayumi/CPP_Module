@@ -2,6 +2,13 @@
 #include <iostream>
 
 int main() {
+	std::cout << "\n===== Test 1: Constructor =====\n";
+	FragTrap unnamed; // Default constructor
+	FragTrap ayumi("Ayumi");
+	FragTrap clappy("Clappy");
+	FragTrap trappy("Trappy");
+	FragTrap clappyCopy(clappy); // Copy constructor
+	trappy = unnamed; // Copy assignment operator
     std::cout << "========== 1. Constructor / Destructor Chain ==========" << std::endl;
     {
         std::cout << "--- Creating FragTrap ---" << std::endl;

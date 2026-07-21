@@ -1,6 +1,7 @@
 #ifndef _CLAPTRAP_H_
 #define _CLAPTRAP_H_
 #include <string>
+
 class ClapTrap
 {
 	public:
