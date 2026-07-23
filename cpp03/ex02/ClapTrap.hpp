@@ -7,8 +7,8 @@ class ClapTrap
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap& input);
-		ClapTrap& operator=(const ClapTrap& input);
+		ClapTrap(const ClapTrap& other);
+		ClapTrap& operator=(const ClapTrap& other);
 		virtual ~ClapTrap();
 		void			attack(const std::string& target);
 		void			takeDamage(unsigned int amount);

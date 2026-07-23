@@ -2,7 +2,7 @@
 #define _ANIMAL_H_
 #include <string>
 
-class Animal // Abstract class
+class Animal
 {
 	public:
 		Animal();

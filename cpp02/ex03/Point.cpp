@@ -4,14 +4,14 @@ Point::Point() : _x(0), _y(0) {}
 
 Point::Point(const float x, const float y) : _x(x), _y(y) {}
 
-Point::Point(const Point& rhs) : _x(rhs.getX()), _y(rhs.getY()) // in case of Point b(a)
+Point::Point(const Point& other) : _x(other.getX()), _y(other.getY()) // in case of Point b(a)
 {
-	*this = rhs;
+	*this = other;
 }
 
-Point& Point::operator=(const Point& rhs)
+Point& Point::operator=(const Point& other)
 {
-	(void) rhs;
+	(void) other;
 	return (*this);
 }
 

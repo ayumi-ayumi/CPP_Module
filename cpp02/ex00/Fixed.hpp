@@ -4,8 +4,8 @@
 class Fixed {
 	public:
 		Fixed();
-		Fixed(const Fixed& rhs);
-		Fixed& operator=(const Fixed& rhs);
+		Fixed(const Fixed& other);
+		Fixed& operator=(const Fixed& other);
 		~Fixed();
 
 		int					getRawBits(void) const;
@@ -24,8 +24,8 @@ Test code
 class Fixed {
 	public:
 		Fixed(std::string name);
-		Fixed(const Fixed& rhs);
-		Fixed& operator=(const Fixed& rhs);
+		Fixed(const Fixed& other);
+		Fixed& operator=(const Fixed& other);
 		~Fixed();
 		int					getRawBits(void) const;
 		void				setRawBits(int const raw);

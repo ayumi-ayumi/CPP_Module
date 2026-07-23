@@ -19,17 +19,17 @@ Fixed::Fixed(const float nbr)
 	_rawValue = static_cast<int>(roundf(nbr * (1 << _fractionalBits)));
 }
 
-Fixed::Fixed(const Fixed& rhs)
+Fixed::Fixed(const Fixed& other)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = rhs;
+	*this = other;
 }
 
-Fixed& Fixed::operator=(const Fixed& rhs)
+Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &rhs)
-		_rawValue = rhs._rawValue;
+	if (this != &other)
+		_rawValue = other._rawValue;
 	return (*this);
 }
 
@@ -58,8 +58,8 @@ int Fixed::toInt(void) const
 	return (static_cast<int>(_rawValue >> _fractionalBits)); // _rawValue / 2^8
 }
 
-std::ostream& operator<<(std::ostream &out, const Fixed& rhs)
+std::ostream& operator<<(std::ostream &out, const Fixed& other)
 {
-	out << rhs.toFloat();
+	out << other.toFloat();
 	return (out);
 }

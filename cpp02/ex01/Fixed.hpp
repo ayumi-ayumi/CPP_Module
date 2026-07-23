@@ -7,8 +7,8 @@ class Fixed {
 		Fixed();
 		Fixed(const int nbr);
 		Fixed(const float nbr);
-		Fixed(const Fixed& rhs);
-		Fixed& operator=(const Fixed& rhs);
+		Fixed(const Fixed& other);
+		Fixed& operator=(const Fixed& other);
 		~Fixed();
 		
 		int					getRawBits(void) const;
@@ -20,6 +20,6 @@ class Fixed {
 		static const int	_fractionalBits = 8;
 };
 
-std::ostream& operator<<(std::ostream &out, const Fixed& rhs);
+std::ostream& operator<<(std::ostream &out, const Fixed& other);
 
 #endif
