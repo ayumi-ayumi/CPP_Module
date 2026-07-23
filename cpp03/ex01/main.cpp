@@ -2,68 +2,66 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-int main(void) {
-	std::cout << "========= 1. INITIALIZATION =========" << std::endl;
-	ScavTrap scav("Scavvy"); // Scavvy: [HP: 100] [EP: 50] [AD: 20]
-	ClapTrap clap("Clappy"); // Clappy: [HP:  10] [EP: 10] [AD:  0]
+int main(void) 
+{
+	{
+		std::cout << "========= 1. DEFAULT CONSTRUCTOR =========" << std::endl;
+		ScavTrap defaultScav;  // Tests ScavTrap default constructor
+		ClapTrap defaultClap;  // Tests ClapTrap default constructor
+		defaultScav.attack("Target Dummy");
+		defaultClap.attack("Target Dummy");
+		std::cout << "--- Scope ending for Section 1 ---" << std::endl;
+	} // defaultScav and defaultClap destructors run here
 	std::cout << std::endl;
 
-	std::cout << "========= 2. DEFAULT CONSTRUCTOR =========" << std::endl;
-	ScavTrap defaultScav;  // Tests ScavTrap default constructor
-	ClapTrap defaultClap;  // Tests ClapTrap default constructor
-	defaultScav.attack("Target Dummy");
-	defaultClap.attack("Target Dummy");
+	{
+		std::cout << "========= 2. PARAMETER & COPY CONSTRUCTORS =========" << std::endl;
+		ScavTrap scav("Scavvy");
+		ClapTrap clap("Clappy");
+
+		std::cout << "\n--- Copying ScavTrap & ClapTrap ---" << std::endl;
+		ScavTrap scavCopy(scav); 
+		ClapTrap clapCopy(clap);
+
+		scavCopy.attack("a clone target");
+		clapCopy.attack("a clone target");
+		std::cout << "--- Scope ending for Section 2 ---" << std::endl;
+	} // Destructors run in reverse order: clapCopy, scavCopy, clap, scav
 	std::cout << std::endl;
 
-	std::cout << "========= 3. COPY CONSTRUCTOR =========" << std::endl;
-	// Test ScavTrap copy constructor
-	ScavTrap scavCopy(scav); 
-	scavCopy.attack("a clone target"); // Should reflect scav's original stats
+	{
+		std::cout << "========= 3. COPY ASSIGNMENT OPERATOR (=) =========" << std::endl;
+		ScavTrap scavOriginal("OriginalScav");
+		ScavTrap scavAssign("TempScav");
 
-	// Test ClapTrap copy constructor
-	ClapTrap clapCopy(clap);
-	clapCopy.attack("a clone target");
+		std::cout << "\n--- Executing Operator= ---" << std::endl;
+		scavAssign = scavOriginal; // Assign scavOriginal to scavAssign
+
+		scavAssign.guardGate();
+		std::cout << "--- Scope ending for Section 3 ---" << std::endl;
+	} // Destructors run here
 	std::cout << std::endl;
 
-	std::cout << "========= 4. COPY ASSIGNMENT OPERATOR (=) =========" << std::endl;
-	ScavTrap scavAssign("TempScav");
-	scavAssign = scav; // Copy attributes of scav ("Scavvy") into scavAssign
+	{
+		std::cout << "========= 4. COMBAT & REPAIR FLOW =========" << std::endl;
+		ScavTrap scav("Scavvy"); // HP: 100, EP: 50
+		ClapTrap clap("Clappy"); // HP: 10,  EP: 10
 
-	ClapTrap clapAssign("TempClap");
-	clapAssign = clap; // Copy attributes of clap ("Clappy") into clapAssign
+		std::cout << "\n--- Combat ---" << std::endl;
+		scav.attack("Clappy");
+		clap.takeDamage(20); // Clappy HP drops to 0 (Dead)
 
-	scavAssign.guardGate(); // Verify it retains full functionality
+		std::cout << "\n--- Action on Dead Object ---" << std::endl;
+		clap.attack("Scavvy"); // Should fail
+		clap.beRepaired(10);   // Should fail
+
+		std::cout << "\n--- Repairing ---" << std::endl;
+		scav.beRepaired(15);
+		scav.guardGate();
+		std::cout << "--- Scope ending for Section 4 ---" << std::endl;
+	} // Destructors run here
 	std::cout << std::endl;
 
-	std::cout << "========= 5. COMBAT FLOW =========" << std::endl;
-
-	// Scavvy attacks: Costs 1 Energy Point
-	scav.attack("Clappy");   // Scavvy: [HP: 100] [EP: 49]
-
-	// Clappy takes 20 damage: Drops from 10 HP to 0 HP (Dead)
-	clap.takeDamage(20);     // Clappy: [HP:   0] [EP: 10]
-	std::cout << std::endl;
-
-	std::cout << "========= 6. DEAD OBJECT FLOW =========" << std::endl;
-
-	// Clappy has 0 HP, so actions fail. No Energy points should be spent!
-	clap.attack("Scavvy");   // Clappy: [HP:   0] [EP: 10] (Fails to attack)
-	clap.beRepaired(10);     // Clappy: [HP:   0] [EP: 10] (Fails to repair)
-	std::cout << std::endl;
-
-	std::cout << "========= 7. REPAIR FLOW =========" << std::endl;
-
-	// Scavvy repairs: Costs 1 Energy Point, recovers 15 HP
-	scav.beRepaired(15);     // Scavvy: [HP: 115] [EP: 48]
-	std::cout << std::endl;
-
-	std::cout << "========= 8. SPECIAL ABILITY =========" << std::endl;
-	scav.guardGate();        // Scavvy: [HP: 115] [EP: 48]
-	scavCopy.guardGate();    // Verify copied object also works
-	std::cout << std::endl;
-
-	std::cout << "========= 9. DESTRUCTOR CHAINING =========" << std::endl;
-	// All objects leave scope in reverse order of creation.
-	// You will observe child destructors firing first, followed by base destructors.
+	std::cout << "========= ALL TESTS COMPLETE =========" << std::endl;
 	return 0;
 }
