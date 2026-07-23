@@ -4,19 +4,19 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-	std::cout << "ScavTrap default constructor created" << std::endl;
 	this->_hitPoints = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
+	std::cout << "ScavTrap default constructor created" << std::endl;
 }
 
 // Parameterized constructor
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "ScavTrap " << name << " created" << std::endl;
 	this->_hitPoints = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
+	std::cout << "ScavTrap " << name << " created" << std::endl;
 }
 
 // Copy constructor
@@ -42,7 +42,7 @@ ScavTrap::~ScavTrap()
 
 void ScavTrap::attack(const std::string& target)
 {
-	if (_hitPoints <= 0 || _energyPoints <= 0)
+	if (_hitPoints == 0 || _energyPoints == 0)
 	{
 		std::cout << "ScavTrap " << _name << " has no hit points or energy points left!" << std::endl;
 		return ;
