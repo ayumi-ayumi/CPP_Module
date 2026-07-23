@@ -33,6 +33,7 @@ int main()
 
 		Dog basic;
 		Dog temp = basic;
+		std::cout << temp.getType() << std::endl;
 		basic.makeSound();
 		// If it is a shallow copy, basic and temp point the same _dogBrain address.
 	}
@@ -45,6 +46,7 @@ int main()
 		Cat neko1;
 		Cat neko2;
 		neko2 = neko1;
+		std::cout << neko1.getType() << std::endl;
 		neko1.makeSound();
 		neko2.makeSound();
 	}
