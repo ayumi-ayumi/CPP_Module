@@ -27,7 +27,6 @@ DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), FragTrap(o
 // Copy assignment operator
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 {
-	std::cout << "DiamondTrap a copy assignment operator constructor created" << std::endl;
 	if (this != &other) // Check if you do not assign yourself (a = a;)
 	{
 		ClapTrap::operator=(other);
@@ -35,6 +34,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 		ScavTrap::operator=(other);
 		this->_name = other._name;
 	}
+	std::cout << "DiamondTrap copy assignment operator called" << std::endl;
 	return (*this);
 }
 
