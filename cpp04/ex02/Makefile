@@ -9,7 +9,7 @@ SRC_DIR	= src
 OBJ_DIR = obj
 
 SRCS_FILES = main.cpp \
-		Animal.cpp \
+		AAnimal.cpp \
 		Dog.cpp \
 		Cat.cpp \
 		Brain.cpp

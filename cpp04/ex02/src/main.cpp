@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include <iostream>
@@ -11,7 +11,7 @@ int main()
 		std::cout << "========================================" << std::endl;
 
 		const int size = 4;
-		Animal* animals[size];
+		AAnimal* animals[size];
 
 		for (int i = 0; i < size / 2; ++i)
 			animals[i] = new Dog();
@@ -19,7 +19,7 @@ int main()
 			animals[i] = new Cat();
 		for (int i = 0; i < size; ++i)
 		{
-			std::cout << "Animal [" << i << "] (" << animals[i]->getType() << "): ";
+			std::cout << "AAnimal [" << i << "] (" << animals[i]->getType() << "): ";
 			animals[i]->makeSound();
 		}
 		for (int i = 0; i < size; ++i)
