@@ -58,6 +58,7 @@ int main(void)
 
 		std::cout << "\n--- Repairing ---" << std::endl;
 		scav.beRepaired(15);
+		scav.takeDamage(30);
 		scav.guardGate();
 		std::cout << "--- Scope ending for Section 4 ---" << std::endl;
 	} // Destructors run here
