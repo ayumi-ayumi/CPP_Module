@@ -22,7 +22,7 @@ ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hitPoints(other
 // Copy assignment operator
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
-	std::cout << "ClapTrap a copy assignment operator constructor created" << std::endl;
+	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	if (this != &other) // Check if you do not assign yourself (a = a;)
 	{
 		_name = other._name;
