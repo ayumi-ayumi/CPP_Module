@@ -1,124 +1,94 @@
+#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
 #include <iostream>
 
-void printHeader(const std::string& title) {
-    std::cout << "\n========================================\n";
-    std::cout << "  " << title << "\n";
-    std::cout << "========================================\n";
+int main(void) 
+{
+	{
+		std::cout << "========= 1. DEFAULT CONSTRUCTOR =========" << std::endl;
+		DiamondTrap defaultDiamond; // Default constructor (HP: 100, EP: 50, AD: 30)
+		
+		defaultDiamond.whoAmI();
+		defaultDiamond.attack("Target Dummy"); // Should use ScavTrap::attack
+		std::cout << "--- Scope ending for Section 1 ---" << std::endl;
+	} // Destructors run in reverse construction order
+	std::cout << std::endl;
+
+	{
+		std::cout << "========= 2. PARAMETER & COPY CONSTRUCTORS =========" << std::endl;
+		DiamondTrap dia("Dia");
+
+		std::cout << "\n--- Checking Initial Identity & Special Abilities ---" << std::endl;
+		dia.whoAmI();
+		dia.guardGate();      // Inherited from ScavTrap
+		dia.highFivesGuys();  // Inherited from FragTrap
+
+		std::cout << "\n--- Copying DiamondTrap ---" << std::endl;
+		DiamondTrap diaCopy(dia);
+
+		diaCopy.whoAmI();
+		diaCopy.attack("a clone target");
+		std::cout << "--- Scope ending for Section 2 ---" << std::endl;
+	} // Destructors run here
+	std::cout << std::endl;
+
+	{
+		std::cout << "========= 3. COPY ASSIGNMENT OPERATOR (=) =========" << std::endl;
+		DiamondTrap diaOriginal("OriginalDia");
+		DiamondTrap diaAssign("TempDia");
+
+		std::cout << "\n--- Executing Operator= ---" << std::endl;
+		diaAssign = diaOriginal; // Assign attributes of diaOriginal to diaAssign
+
+		diaAssign.whoAmI();
+		diaAssign.guardGate();
+		diaAssign.highFivesGuys();
+		std::cout << "--- Scope ending for Section 3 ---" << std::endl;
+	} // Destructors run here
+	std::cout << std::endl;
+
+	{
+		std::cout << "========= 4. COMBAT & REPAIR FLOW =========" << std::endl;
+		DiamondTrap dia("Dia");  // HP: 100 (from FragTrap), EP: 50 (from ScavTrap), AD: 30 (from FragTrap)
+		ClapTrap clap("Clappy"); // HP: 10, EP: 10, AD: 0
+
+		std::cout << "\n--- Combat ---" << std::endl;
+		dia.attack("Clappy");   // Should output ScavTrap's attack message!
+		clap.takeDamage(30);    // Clappy HP drops to 0 (Dead)
+
+		std::cout << "\n--- Action on Dead Object ---" << std::endl;
+		clap.attack("Dia");     // Should fail
+		clap.beRepaired(10);    // Should fail
+
+		std::cout << "\n--- Repairing & Special Ability ---" << std::endl;
+		dia.beRepaired(15);
+		dia.whoAmI();
+		std::cout << "--- Scope ending for Section 4 ---" << std::endl;
+	} // Destructors run here
+	std::cout << std::endl;
+
+	{
+		std::cout << "========= 5. POLYMORPHISM & VIRTUAL DESTRUCTOR =========" << std::endl;
+		
+		std::cout << "--- Base Pointer to DiamondTrap (ClapTrap*) ---" << std::endl;
+		ClapTrap* clapPtr = new DiamondTrap("PolymorphicDia");
+		clapPtr->attack("Target"); // Calls ScavTrap::attack() via ClapTrap virtual mechanism
+		delete clapPtr;            // Triggers ~DiamondTrap -> ~ScavTrap -> ~FragTrap -> ~ClapTrap chain!
+
+		std::cout << "\n--- Base Pointer to DiamondTrap (FragTrap*) ---" << std::endl;
+		FragTrap* fragPtr = new DiamondTrap("FragDia");
+		fragPtr->highFivesGuys();
+		delete fragPtr;            // Triggers complete destruction chain
+		
+		std::cout << "--- Scope ending for Section 5 ---" << std::endl;
+	}
+	std::cout << std::endl;
+
+	std::cout << "========= ALL TESTS COMPLETE =========" << std::endl;
+	return 0;
 }
 
-int main() {
-    printHeader("1. CREATION & DESTRUCTION CHAINING");
-    {
-        std::cout << "--> Constructing DiamondTrap 'Sparkle':" << std::endl;
-        DiamondTrap diamond("Sparkle");
-
-        std::cout << "\n--> Destroying 'Sparkle' (Observe reverse order):" << std::endl;
-    }
-
-    printHeader("2. IDENTIFICATION & METHOD OVERRIDES");
-    {
-        DiamondTrap diamond("Sparkle");
-
-        std::cout << "\n--> Testing whoAmI():" << std::endl;
-        diamond.whoAmI();
-
-        std::cout << "\n--> Testing attack() (Must use ScavTrap's attack!):" << std::endl;
-        diamond.attack("Target Dummy");
-
-        std::cout << "\n--> Testing inherited special capabilities:" << std::endl;
-        diamond.guardGate();       // From ScavTrap
-        diamond.highFivesGuys();   // From FragTrap
-    }
-
-    printHeader("3. COPY CONSTRUCTOR & ASSIGNMENT OPERATOR");
-    {
-        DiamondTrap original("Original");
-
-        std::cout << "\n--> Copy Constructor:" << std::endl;
-        DiamondTrap copy(original);
-        copy.whoAmI();
-
-        std::cout << "\n--> Copy Assignment Operator:" << std::endl;
-        DiamondTrap assigned("Temp");
-        assigned = original;
-        assigned.whoAmI();
-    }
-
-    return 0;
-}
-
-/*
-========================================
-  1. CREATION & DESTRUCTION CHAINING
-========================================
---> Constructing DiamondTrap 'Sparkle':
-ClapTrap Sparkle_clap_name created
-FragTrap Sparkle created
-ScavTrap Sparkle created
-DiamondTrap Sparkle created
-
---> Destroying 'Sparkle' (Observe reverse order):
-DiamondTrap Sparkle destroyed
-ScavTrap Sparkle destroyed
-FragTrap Sparkle destroyed
-ClapTrap Sparkle_clap_name destroyed
-
-========================================
-  2. IDENTIFICATION & METHOD OVERRIDES
-========================================
-ClapTrap Sparkle_clap_name created
-FragTrap Sparkle created
-ScavTrap Sparkle created
-DiamondTrap Sparkle created
-
---> Testing whoAmI():
-I am DiamondTrap 'Sparkle' and my ClapTrap name is 'Sparkle_clap_name'
-
---> Testing attack() (Must use ScavTrap's attack!):
-ScavTrap Sparkle_clap_name attacks Target Dummy, causing 30 points of damage!
-
---> Testing inherited special capabilities:
-ScavTrap Sparkle is now in Gatekeeper mode!
-FragTrap Sparkle requests a positive high five! 🖐️
-
-========================================
-  3. COPY CONSTRUCTOR & ASSIGNMENT OPERATOR
-========================================
-ClapTrap Original_clap_name created
-FragTrap Original created
-ScavTrap Original created
-DiamondTrap Original created
-
---> Copy Constructor:
-ClapTrap Original_clap_name created
-FragTrap Original created
-ScavTrap Original created
-DiamondTrap copy constructor created
-I am DiamondTrap 'Original' and my ClapTrap name is 'Original_clap_name'
-
---> Copy Assignment Operator:
-ClapTrap Temp_clap_name created
-FragTrap Temp created
-ScavTrap Temp created
-DiamondTrap Temp created
-DiamondTrap copy assignment operator created
-I am DiamondTrap 'Original' and my ClapTrap name is 'Original_clap_name'
-
-DiamondTrap Original destroyed
-ScavTrap Original destroyed
-FragTrap Original destroyed
-ClapTrap Original_clap_name destroyed
-DiamondTrap Original destroyed
-ScavTrap Original destroyed
-FragTrap Original destroyed
-ClapTrap Original_clap_name destroyed
-DiamondTrap Original destroyed
-ScavTrap Original destroyed
-FragTrap Original destroyed
-ClapTrap Original_clap_name destroyed
-DiamondTrap Sparkle destroyed
-ScavTrap Sparkle destroyed
-FragTrap Sparkle destroyed
-ClapTrap Sparkle_clap_name destroyed
-*/
+  // FragTrap *ayumi = new DiamondTrap("abc");
+  // delete ayumi;
