@@ -9,7 +9,7 @@ class Animal
 		Animal(std::string type);
 		Animal(const Animal& other);
 		Animal& operator=(const Animal& other);
-		virtual ~Animal();
+		virtual ~Animal(); // Without virtual, skip all the derived deconstrucor when deleting
 		virtual void makeSound() const;
 		const std::string getType() const;
 	protected:
