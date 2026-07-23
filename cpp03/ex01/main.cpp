@@ -2,6 +2,7 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
+
 int main(void) 
 {
 	{
@@ -60,6 +61,12 @@ int main(void)
 		scav.guardGate();
 		std::cout << "--- Scope ending for Section 4 ---" << std::endl;
 	} // Destructors run here
+	{
+		std::cout << "========= 5. virtual attack() =========" << std::endl;
+		ScavTrap scav("Scavvy");
+		ClapTrap* ptr = &scav; // Upcasting to base pointer
+		ptr->attack("Target"); // ❌ Without virtual: Calls ClapTrap::attack() instead of ScavTrap::attack()!
+	}
 	std::cout << std::endl;
 
 	std::cout << "========= ALL TESTS COMPLETE =========" << std::endl;
