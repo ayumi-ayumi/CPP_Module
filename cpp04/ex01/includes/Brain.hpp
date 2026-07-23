@@ -1,6 +1,5 @@
 #ifndef _BRAIN_H_
 #define _BRAIN_H_
-#include "Animal.hpp"
 #include <string>
 
 class Brain
