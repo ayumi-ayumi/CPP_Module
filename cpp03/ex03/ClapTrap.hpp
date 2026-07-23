@@ -10,7 +10,7 @@ class ClapTrap
 		ClapTrap(const ClapTrap& input);
 		ClapTrap& operator=(const ClapTrap& input);
 		virtual ~ClapTrap();
-		void			attack(const std::string& target);
+		virtual void	attack(const std::string& target);
 		void			takeDamage(unsigned int amount);
 		void			beRepaired(unsigned int amount);
 	protected:
