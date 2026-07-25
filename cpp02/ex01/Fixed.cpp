@@ -7,16 +7,14 @@ Fixed::Fixed() : _rawValue(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int nbr)
+Fixed::Fixed(const int nbr) : _rawValue(nbr * (1 << _fractionalBits)) // Shift 8 bits to the left (2^8) = 256
 {
 	std::cout << "Int constructor called" << std::endl;
-	_rawValue = nbr * (1 << _fractionalBits); // Shift 8 bits to the left (2^8) = 256
 }
 
-Fixed::Fixed(const float nbr)
+Fixed::Fixed(const float nbr) : _rawValue(static_cast<int>(roundf(nbr * (1 << _fractionalBits))))
 {
 	std::cout << "Float constructor called" << std::endl;
-	_rawValue = static_cast<int>(roundf(nbr * (1 << _fractionalBits)));
 }
 
 Fixed::Fixed(const Fixed& other)

@@ -4,15 +4,9 @@
 
 Fixed::Fixed() : _rawValue(0) {}
 
-Fixed::Fixed(const int nbr)
-{
-	_rawValue = nbr << _fractionalBits; // Same as _rawValue = nbr * (1 << _fractionalBits);
-}
+Fixed::Fixed(const int nbr) : _rawValue(nbr << _fractionalBits) {} // Same as _rawValue = nbr * (1 << _fractionalBits);
 
-Fixed::Fixed(const float nbr)
-{
-	_rawValue = static_cast<int>(roundf(nbr * (1 << _fractionalBits)));
-}
+Fixed::Fixed(const float nbr) : _rawValue(static_cast<int>(roundf(nbr * (1 << _fractionalBits)))) {}
 
 Fixed::Fixed(const Fixed& rhs)
 {

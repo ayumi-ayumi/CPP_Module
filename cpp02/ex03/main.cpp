@@ -30,21 +30,21 @@ int main() {
 
 	const char *expected[] =
 	{
-		"true",
-		"true",
-		"true",
-		"false",
-		"false",
-		"false",
-		"false",
-		"false",
-		"false",
-		"false",
-		"false",
-		"false",
-		"false",
-		"true",
-		"true"
+		"True",
+		"True",
+		"True",
+		"False",
+		"False",
+		"False",
+		"False",
+		"False",
+		"False",
+		"False",
+		"False",
+		"False",
+		"False",
+		"True",
+		"True"
 	};
 
 	for (int i = 0; i < 15; i++)
@@ -54,7 +54,7 @@ int main() {
 		std::cout
 			<< "Test " << i + 1
 			<< " : expected = " << expected[i]
-			<< " | got = " << (result ? "true" : "false")
+			<< " | got = " << (result ? "True" : "False")
 			<< std::endl;
 	}
 
