@@ -9,7 +9,6 @@ class Point {
 		Point(const Point& other);
 		Point& operator=(const Point& other);
 		~Point();
-
 		float		getX() const;
 		float		getY() const;
 	private:
