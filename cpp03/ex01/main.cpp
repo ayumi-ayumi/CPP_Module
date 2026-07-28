@@ -2,8 +2,7 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-
-int main(void) 
+int main(void)
 {
 	{
 		std::cout << "========= 1. DEFAULT CONSTRUCTOR =========" << std::endl;
@@ -21,7 +20,7 @@ int main(void)
 		ClapTrap clap("Clappy");
 
 		std::cout << "\n--- Copying ScavTrap & ClapTrap ---" << std::endl;
-		ScavTrap scavCopy(scav); 
+		ScavTrap scavCopy(scav);
 		ClapTrap clapCopy(clap);
 
 		scavCopy.attack("a clone target");
