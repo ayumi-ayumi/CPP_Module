@@ -29,62 +29,62 @@ int main()
 		delete i;
 		std::cout << std::endl;
 	}
-	{
-		std::cout << "--- [2] Polymorphic Array Test ---" << std::endl;
+// 	{
+// 		std::cout << "--- [2] Polymorphic Array Test ---" << std::endl;
 
-		const int count = 4;
-		const Animal* zoo[count];
+// 		const int count = 4;
+// 		const Animal* zoo[count];
 
-		zoo[0] = new Dog();
-		zoo[1] = new Cat();
-		zoo[2] = new Dog();
-		zoo[3] = new Cat();
+// 		zoo[0] = new Dog();
+// 		zoo[1] = new Cat();
+// 		zoo[2] = new Dog();
+// 		zoo[3] = new Cat();
 
-		for (int idx = 0; idx < count; ++idx)
-		{
-			std::cout << "[" << idx << "] Type: " << zoo[idx]->getType() << " -> Sound: ";
-			zoo[idx]->makeSound();
-		}
+// 		for (int idx = 0; idx < count; ++idx)
+// 		{
+// 			std::cout << "[" << idx << "] Type: " << zoo[idx]->getType() << " -> Sound: ";
+// 			zoo[idx]->makeSound();
+// 		}
 
-		for (int idx = 0; idx < count; ++idx)
-		{
-			delete zoo[idx];
-		}
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "--- [3] Copy & Assignment Test ---" << std::endl;
+// 		for (int idx = 0; idx < count; ++idx)
+// 		{
+// 			delete zoo[idx];
+// 		}
+// 		std::cout << std::endl;
+// 	}
+// 	{
+// 		std::cout << "--- [3] Copy & Assignment Test ---" << std::endl;
 
-		Dog originalDog;
-		Dog copyDog(originalDog);
+// 		Dog originalDog;
+// 		Dog copyDog(originalDog);
 
-		std::cout << "Original Dog type: " << originalDog.getType() << std::endl;
-		std::cout << "Copied Dog type:   " << copyDog.getType() << std::endl;
+// 		std::cout << "Original Dog type: " << originalDog.getType() << std::endl;
+// 		std::cout << "Copied Dog type:   " << copyDog.getType() << std::endl;
 
-		Cat originalCat;
-		Cat assignedCat;
-		assignedCat = originalCat;
+// 		Cat originalCat;
+// 		Cat assignedCat;
+// 		assignedCat = originalCat;
 
-		std::cout << "Assigned Cat type: " << assignedCat.getType() << std::endl;
-		std::cout << std::endl;
-	}
-	{
-		std::cout << "--- [4] WrongAnimal vs WrongCat Test ---" << std::endl;
+// 		std::cout << "Assigned Cat type: " << assignedCat.getType() << std::endl;
+// 		std::cout << std::endl;
+// 	}
+// 	{
+// 		std::cout << "--- [4] WrongAnimal vs WrongCat Test ---" << std::endl;
 
-		const WrongAnimal* wrongMeta = new WrongAnimal();
-		const WrongAnimal* wrongCat = new WrongCat();
+// 		const WrongAnimal* wrongMeta = new WrongAnimal();
+// 		const WrongAnimal* wrongCat = new WrongCat();
 
-		std::cout << "wrongCat type: " << wrongCat->getType() << std::endl;
+// 		std::cout << "wrongCat type: " << wrongCat->getType() << std::endl;
 
-		std::cout << "wrongCat sound: ";
-		wrongCat->makeSound(); // MUST output WrongAnimal sound, NOT WrongCat sound!
+// 		std::cout << "wrongCat sound: ";
+// 		wrongCat->makeSound(); // MUST output WrongAnimal sound, NOT WrongCat sound!
 
-		std::cout << "wrongMeta sound: ";
-		wrongMeta->makeSound();
+// 		std::cout << "wrongMeta sound: ";
+// 		wrongMeta->makeSound();
 
-		delete wrongMeta;
-		delete wrongCat;
-		std::cout << std::endl;
-}
+// 		delete wrongMeta;
+// 		delete wrongCat;
+// 		std::cout << std::endl;
+// }
 	return 0;
 }

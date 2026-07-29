@@ -4,14 +4,14 @@
 
 Dog::Dog() : Animal()
 {
-	this->_type = "dog";
+	this->_type = "Dog";
 	std::cout << "Dog default constructor created" << std::endl;
 
 }
 
 Dog::Dog(const Dog& other) : Animal(other)
 {
-	this->_type = "dog";
+	this->_type = "Dog";
 	std::cout << "Dog copy constructor created" << std::endl;
 }
 
@@ -23,7 +23,7 @@ Dog& Dog::operator=(const Dog& other)
 	return (*this);
 }
 
-Dog::~Dog() 
+Dog::~Dog()
 {
 	std::cout << "Dog destroyed" << std::endl;
 }
