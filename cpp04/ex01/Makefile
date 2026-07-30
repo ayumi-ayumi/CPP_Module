@@ -2,7 +2,7 @@ NAME = animal
 
 CXX = c++
 
-CXXFLAGS =  -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 INC_DIR	= includes
 SRC_DIR	= src

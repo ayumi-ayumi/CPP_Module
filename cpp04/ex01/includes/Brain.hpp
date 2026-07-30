@@ -9,7 +9,7 @@ class Brain
 		Brain(const Brain& other);
 		Brain& operator=(const Brain& other);
 		virtual ~Brain();
-		std::string _ideas[100];
+		std::string	_ideas[100];
 };
 
 #endif
