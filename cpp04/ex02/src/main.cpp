@@ -26,29 +26,29 @@ int main()
 			delete animals[i];
 	}
 
-	{
-		std::cout << "\n========================================" << std::endl;
-		std::cout << "  2. Deep Copy Test (Dog)               " << std::endl;
-		std::cout << "========================================" << std::endl;
+	// {
+	// 	std::cout << "\n========================================" << std::endl;
+	// 	std::cout << "  2. Deep Copy Test (Dog)               " << std::endl;
+	// 	std::cout << "========================================" << std::endl;
 
-		Dog basic;
-		Dog temp = basic;
-		std::cout << temp.getType() << std::endl;
-		basic.makeSound();
-		// If it is a shallow copy, basic and temp point the same _dogBrain address.
-	}
+	// 	Dog basic;
+	// 	Dog temp = basic;
+	// 	std::cout << temp.getType() << std::endl;
+	// 	basic.makeSound();
+	// 	// If it is a shallow copy, basic and temp point the same _dogBrain address.
+	// }
 
-	{
-		std::cout << "\n========================================" << std::endl;
-		std::cout << "  3. Assignment Operator Deep Copy Test " << std::endl;
-		std::cout << "========================================" << std::endl;
+	// {
+	// 	std::cout << "\n========================================" << std::endl;
+	// 	std::cout << "  3. Assignment Operator Deep Copy Test " << std::endl;
+	// 	std::cout << "========================================" << std::endl;
 
-		Cat neko1;
-		Cat neko2;
-		neko2 = neko1;
-		std::cout << neko1.getType() << std::endl;
-		neko1.makeSound();
-		neko2.makeSound();
-	}
+	// 	Cat neko1;
+	// 	Cat neko2;
+	// 	neko2 = neko1;
+	// 	std::cout << neko1.getType() << std::endl;
+	// 	neko1.makeSound();
+	// 	neko2.makeSound();
+	// }
 	return (0);
 }

@@ -2,7 +2,7 @@
 #define _AANIMAL_H_
 #include <string>
 
-class AAnimal
+class AAnimal // Abstract class, not be instantiable
 {
 	public:
 		AAnimal();
@@ -10,10 +10,10 @@ class AAnimal
 		AAnimal(const AAnimal& other);
 		AAnimal& operator=(const AAnimal& other);
 		virtual ~AAnimal();
-		virtual void makeSound() const = 0;
-		const std::string getType() const;
+		virtual void		makeSound() const = 0; // Abstract method(pure virtual function)
+		const std::string	getType() const;
 	protected:
-		std::string _type;
+		std::string			_type;
 };
 
 #endif
