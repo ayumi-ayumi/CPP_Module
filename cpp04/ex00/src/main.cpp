@@ -68,23 +68,23 @@ int main()
 // 		std::cout << "Assigned Cat type: " << assignedCat.getType() << std::endl;
 // 		std::cout << std::endl;
 // 	}
-// 	{
-// 		std::cout << "--- [4] WrongAnimal vs WrongCat Test ---" << std::endl;
+	{
+		std::cout << "--- [4] WrongAnimal vs WrongCat Test ---" << std::endl;
 
-// 		const WrongAnimal* wrongMeta = new WrongAnimal();
-// 		const WrongAnimal* wrongCat = new WrongCat();
+		const WrongAnimal* wrongMeta = new WrongAnimal();
+		const WrongAnimal* wrongCat = new WrongCat();
 
-// 		std::cout << "wrongCat type: " << wrongCat->getType() << std::endl;
+		std::cout << "wrongCat type: " << wrongCat->getType() << std::endl;
 
-// 		std::cout << "wrongCat sound: ";
-// 		wrongCat->makeSound(); // MUST output WrongAnimal sound, NOT WrongCat sound!
+		std::cout << "wrongCat sound: ";
+		wrongCat->makeSound(); // MUST output WrongAnimal sound, NOT WrongCat sound! It's because there is no "vitual" on makeSound() in WrongAnimal class
 
-// 		std::cout << "wrongMeta sound: ";
-// 		wrongMeta->makeSound();
+		std::cout << "wrongMeta sound: ";
+		wrongMeta->makeSound();
 
-// 		delete wrongMeta;
-// 		delete wrongCat;
-// 		std::cout << std::endl;
-// }
+		delete wrongMeta;
+		delete wrongCat;
+		std::cout << std::endl;
+}
 	return 0;
 }
