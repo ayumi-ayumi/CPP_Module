@@ -7,7 +7,8 @@ CXXFLAGS =  -Wall -Wextra -Werror -Wno-shadow -std=c++98
 OBJ_DIR = obj
 
 SRCS = main.cpp \
-		Bureaucrat.cpp
+		Bureaucrat.cpp \
+		Form.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 OBJS = $(addprefix $(OBJ_DIR)/, $(OBJ))

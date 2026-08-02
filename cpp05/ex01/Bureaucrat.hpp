@@ -1,9 +1,10 @@
 #ifndef _BUREAUCRAT_H_
 #define _BUREAUCRAT_H_
+#include "Form.hpp"
 #include <string>
 #include <ostream>
 
-class Bureaucrat
+class Bureaucrat : public Form
 {
 	public:
 		Bureaucrat();
@@ -18,15 +19,17 @@ class Bureaucrat
 		void				increaseGrade(); // grade++;
 		void				decreaseGrade(); // grade--;
 
-		class GradeTooHighException : public std::exception
-		{
-			const char*		what() const throw();
-		};
+		// void				signForm();
 
-		class GradeTooLowException : public std::exception
-		{
-			const char*		what() const throw();
-		};
+		// class GradeTooHighException : public std::exception
+		// {
+		// 	const char*		what() const throw();
+		// };
+
+		// class GradeTooLowException : public std::exception
+		// {
+		// 	const char*		what() const throw();
+		// };
 		
 	private:
 		const std::string	_name;
