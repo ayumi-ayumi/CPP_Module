@@ -2,9 +2,6 @@
 #define _SHRUBBERY_H_
 #include "AForm.hpp"
 #include <string>
-#include <ostream>
-
-// class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm
 {
@@ -14,8 +11,8 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(const ShrubberyCreationForm& other);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		~ShrubberyCreationForm();
-		void	execute(Bureaucrat const & executor) const;
-		const std::string _target;
+		void				execute(Bureaucrat const & executor) const;
+		const std::string	_target;
 };
 
 #endif

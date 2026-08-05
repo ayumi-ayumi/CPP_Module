@@ -1,18 +1,20 @@
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include <iostream>
-
+#include <ctime>
 int main()
 {
+    std::srand((unsigned)std::time(NULL));
     std::cout << "========== Test 1: Valid Bureaucrat & AForm ==========\n";
     try
     {
         Bureaucrat bob("Bob", 42);
-        ShrubberyCreationForm form1("form1");
-        ShrubberyCreationForm form2("form2");
-        form2 = form1;
+        RobotomyRequestForm form1("form1");
+        // ShrubberyCreationForm form2("form2");
+        // form2 = form1;
 
-        form2.execute(bob);
+        form1.execute(bob);
         // AForm contract("Contract", 50, 25);
 
         std::cout << bob << std::endl;

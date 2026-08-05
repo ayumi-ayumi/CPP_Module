@@ -17,11 +17,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-void drawTree()
-{
-	
-}
-
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	if (executor.getGrade()<= 145)
@@ -33,24 +28,22 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 			std::cerr << "|--- Failed to create a file ---|" << std::endl;
 			std::exit(1);
 		}
-
-fileout << "        *              *              *\n";
-fileout << "       ***            ***            ***\n";
-fileout << "      *****          *****          *****\n";
-fileout << "     *******        *******        *******\n";
-fileout << "    *********      *********      *********\n";
-fileout << "       |||            |||            |||\n";
-fileout << "       |||            |||            |||\n";
-fileout << "\n";
-
-fileout << "          *                 *                 *\n";
-fileout << "         ***               ***               ***\n";
-fileout << "        *****             *****             *****\n";
-fileout << "       *******           *******           *******\n";
-fileout << "      *********         *********         *********\n";
-fileout << "     ***********       ***********       ***********\n";
-fileout << "         |||               |||               |||\n";
-fileout << "         |||               |||               |||\n";
+		fileout << "        *              *              *\n";
+		fileout << "       ***            ***            ***\n";
+		fileout << "      *****          *****          *****\n";
+		fileout << "     *******        *******        *******\n";
+		fileout << "    *********      *********      *********\n";
+		fileout << "       |||            |||            |||\n";
+		fileout << "       |||            |||            |||\n";
+		fileout << "\n";
+		fileout << "          *                 *                 *\n";
+		fileout << "         ***               ***               ***\n";
+		fileout << "        *****             *****             *****\n";
+		fileout << "       *******           *******           *******\n";
+		fileout << "      *********         *********         *********\n";
+		fileout << "     ***********       ***********       ***********\n";
+		fileout << "         |||               |||               |||\n";
+		fileout << "         |||               |||               |||\n";
 	}
 	else
 		throw (GradeTooLowException());
