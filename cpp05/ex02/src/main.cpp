@@ -88,49 +88,49 @@ int main()
         std::cout << e.what() << std::endl;
     }
 
-    // std::cout << "\n========== Test 6: Presidential Pardon ==========\n";
-    // try
-    // {
-    //     Bureaucrat president("President", 1);
-    //     PresidentialPardonForm pardon("Arthur Dent");
+    std::cout << "\n========== Test 6: Presidential Pardon ==========\n";
+    try
+    {
+        Bureaucrat president("President", 1);
+        PresidentialPardonForm pardon("Arthur Dent");
 
-    //     president.signForm(pardon);
-    //     president.executeForm(pardon);
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+        president.signForm(pardon);
+        president.executeForm(pardon);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
-    // std::cout << "\n========== Test 7: Form constructor exceptions ==========\n";
-    // try
-    // {
-    //     ShrubberyCreationForm bad("");
-    //     Bureaucrat invalid("Invalid", 0);
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+    std::cout << "\n========== Test 7: Form constructor exceptions ==========\n";
+    try
+    {
+        ShrubberyCreationForm bad("");
+        Bureaucrat invalid("Invalid", 0);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
-    // std::cout << "\n========== Test 8: Different Bureaucrat grades ==========\n";
-    // try
-    // {
-    //     Bureaucrat a("A", 150);
-    //     Bureaucrat b("B", 145);
-    //     Bureaucrat c("C", 137);
+    std::cout << "\n========== Test 8: Different Bureaucrat grades ==========\n";
+    try
+    {
+        Bureaucrat a("A", 150);
+        Bureaucrat b("B", 145);
+        Bureaucrat c("C", 137);
 
-    //     ShrubberyCreationForm tree("school");
+        ShrubberyCreationForm tree("school");
 
-    //     a.signForm(tree);      // fail
-    //     b.signForm(tree);      // success
-    //     b.executeForm(tree);   // fail
-    //     c.executeForm(tree);   // success
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+        a.signForm(tree);      // fail
+        b.signForm(tree);      // success
+        b.executeForm(tree);   // fail
+        c.executeForm(tree);   // success
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
     return 0;
 }

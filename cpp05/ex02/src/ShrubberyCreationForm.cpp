@@ -44,13 +44,3 @@ void ShrubberyCreationForm::action() const
 	fileout << "         |||               |||               |||\n";
 	std::cout << "|--- File has been created successfully ---|" << std::endl;
 }
-
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
-{
-	if (executor.getGrade() >= 137)
-		throw (GradeTooLowException());
-	else if (!getIsSigned())
-		throw (FormNotSignedException());
-	else
-		action();
-}

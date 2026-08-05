@@ -26,11 +26,3 @@ void RobotomyRequestForm::action() const
 	else
 		std::cout << "The robotomy failed" << std::endl;
 }
-
-void RobotomyRequestForm::execute(Bureaucrat const & executor) const
-{
-	if (executor.getGrade()<= 137 && getIsSigned())
-		action();
-	else
-		throw (GradeTooLowException());
-}
