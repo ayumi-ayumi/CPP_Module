@@ -2,7 +2,7 @@ NAME = bureaucrat
 
 CXX = c++
 
-CXXFLAGS =  -Wall -Wextra -Werror -Wno-shadow -std=c++98 -g
+CXXFLAGS =  -Wall -Wextra -Werror -Wno-shadow -std=c++98
 
 OBJ_DIR = obj
 
