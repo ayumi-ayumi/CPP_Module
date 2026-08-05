@@ -17,34 +17,40 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
+void ShrubberyCreationForm::action() const
+{
+	std::string outputFileName = _target + "_shrubbery";
+	std::ofstream fileout(outputFileName.c_str());
+	if (!fileout)
+	{
+		std::cerr << "|--- Failed to create a file ---|" << std::endl;
+		std::exit(1);
+	}
+	fileout << "        *              *              *\n";
+	fileout << "       ***            ***            ***\n";
+	fileout << "      *****          *****          *****\n";
+	fileout << "     *******        *******        *******\n";
+	fileout << "    *********      *********      *********\n";
+	fileout << "       |||            |||            |||\n";
+	fileout << "       |||            |||            |||\n";
+	fileout << "\n";
+	fileout << "          *                 *                 *\n";
+	fileout << "         ***               ***               ***\n";
+	fileout << "        *****             *****             *****\n";
+	fileout << "       *******           *******           *******\n";
+	fileout << "      *********         *********         *********\n";
+	fileout << "     ***********       ***********       ***********\n";
+	fileout << "         |||               |||               |||\n";
+	fileout << "         |||               |||               |||\n";
+	std::cout << "|--- File has been created successfully ---|" << std::endl;
+}
+
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	if (executor.getGrade()<= 145)
-	{
-		std::string outputFileName = _target + "_shrubbery";
-		std::ofstream fileout(outputFileName.c_str());
-		if (!fileout)
-		{
-			std::cerr << "|--- Failed to create a file ---|" << std::endl;
-			std::exit(1);
-		}
-		fileout << "        *              *              *\n";
-		fileout << "       ***            ***            ***\n";
-		fileout << "      *****          *****          *****\n";
-		fileout << "     *******        *******        *******\n";
-		fileout << "    *********      *********      *********\n";
-		fileout << "       |||            |||            |||\n";
-		fileout << "       |||            |||            |||\n";
-		fileout << "\n";
-		fileout << "          *                 *                 *\n";
-		fileout << "         ***               ***               ***\n";
-		fileout << "        *****             *****             *****\n";
-		fileout << "       *******           *******           *******\n";
-		fileout << "      *********         *********         *********\n";
-		fileout << "     ***********       ***********       ***********\n";
-		fileout << "         |||               |||               |||\n";
-		fileout << "         |||               |||               |||\n";
-	}
-	else
+	if (executor.getGrade() >= 137)
 		throw (GradeTooLowException());
+	else if (!getIsSigned())
+		throw (FormNotSignedException());
+	else
+		action();
 }

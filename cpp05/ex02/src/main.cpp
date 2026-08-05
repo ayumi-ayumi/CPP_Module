@@ -1,130 +1,131 @@
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+
 #include <iostream>
+#include <cstdlib>
 #include <ctime>
+
 int main()
 {
-    std::srand((unsigned)std::time(NULL));
-    std::cout << "========== Test 1: Valid Bureaucrat & AForm ==========\n";
+    std::srand(std::time(NULL));
+
+    std::cout << "========== Test 1: Shrubbery ==========\n";
     try
     {
-        Bureaucrat bob("Bob", 42);
-        RobotomyRequestForm form1("form1");
-        // ShrubberyCreationForm form2("form2");
-        // form2 = form1;
+        Bureaucrat bob("Bob", 1);
+        ShrubberyCreationForm tree("garden");
 
-        form1.execute(bob);
-        // AForm contract("Contract", 50, 25);
+        bob.signForm(tree);
+        bob.executeForm(tree);
 
-        std::cout << bob << std::endl;
-        // std::cout << contract << std::endl;
+        std::cout << "Check that 'garden_shrubbery' was created.\n";
     }
     catch (std::exception &e)
     {
         std::cout << e.what() << std::endl;
     }
 
-    // std::cout << "\n========== Test 2: AForm grade too high ==========\n";
+    std::cout << "\n========== Test 2: Execute unsigned form ==========\n";
+    try
+    {
+        Bureaucrat bob("Bob", 1);
+        ShrubberyCreationForm tree("home");
+
+        bob.executeForm(tree);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "\n========== Test 3: Grade too low to sign ==========\n";
+    try
+    {
+        Bureaucrat low("Low", 150);
+        ShrubberyCreationForm tree("forest");
+
+        low.signForm(tree);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "\n========== Test 4: Grade too low to execute ==========\n";
+    try
+    {
+        Bureaucrat signer("Signer", 100);
+        Bureaucrat executor("Executor", 140);
+
+        ShrubberyCreationForm tree("park");
+
+        signer.signForm(tree);
+        executor.executeForm(tree);
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "\n========== Test 5: Robotomy ==========\n";
+    try
+    {
+        Bureaucrat boss("Boss", 1);
+        RobotomyRequestForm robot("Bender");
+
+        boss.signForm(robot);
+
+        for (int i = 0; i < 5; i++)
+        {
+            std::cout << "Attempt " << i + 1 << ":" << std::endl;
+            boss.executeForm(robot);
+        }
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    // std::cout << "\n========== Test 6: Presidential Pardon ==========\n";
     // try
     // {
-    //     AForm f("Invalid", 0, 10);
+    //     Bureaucrat president("President", 1);
+    //     PresidentialPardonForm pardon("Arthur Dent");
+
+    //     president.signForm(pardon);
+    //     president.executeForm(pardon);
     // }
     // catch (std::exception &e)
     // {
     //     std::cout << e.what() << std::endl;
     // }
 
-    // std::cout << "\n========== Test 3: AForm grade too low ==========\n";
+    // std::cout << "\n========== Test 7: Form constructor exceptions ==========\n";
     // try
     // {
-    //     AForm f("Invalid", 10, 151);
+    //     ShrubberyCreationForm bad("");
+    //     Bureaucrat invalid("Invalid", 0);
     // }
     // catch (std::exception &e)
     // {
     //     std::cout << e.what() << std::endl;
     // }
 
-    // std::cout << "\n========== Test 4: Successful signing ==========\n";
+    // std::cout << "\n========== Test 8: Different Bureaucrat grades ==========\n";
     // try
     // {
-    //     Bureaucrat boss("Boss", 1);
-    //     AForm tax("Tax AForm", 50, 30);
+    //     Bureaucrat a("A", 150);
+    //     Bureaucrat b("B", 145);
+    //     Bureaucrat c("C", 137);
 
-    //     std::cout << tax << std::endl;
+    //     ShrubberyCreationForm tree("school");
 
-    //     boss.signForm(tax);
-
-    //     std::cout << tax << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
-
-    // std::cout << "\n========== Test 5: Failed signing ==========\n";
-    // try
-    // {
-    //     Bureaucrat intern("Intern", 100);
-    //     AForm secret("Top Secret", 20, 10);
-
-    //     std::cout << secret << std::endl;
-
-    //     intern.signForm(secret);
-
-    //     std::cout << secret << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
-
-    // std::cout << "\n========== Test 6: Sign already signed form ==========\n";
-    // try
-    // {
-    //     Bureaucrat alice("Alice", 1);
-    //     Bureaucrat john("John", 10);
-    //     AForm form("Agreement", 20, 20);
-
-    //     alice.signForm(form);
-    //     john.signForm(form);
-
-    //     std::cout << form << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
-
-    // std::cout << "\n========== Test 7: Copy constructor ==========\n";
-    // try
-    // {
-    //     AForm original("Original", 30, 40);
-    //     AForm copy(original);
-
-    //     std::cout << original << std::endl;
-    //     std::cout << copy << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
-
-    // std::cout << "\n========== Test 8: Assignment operator ==========\n";
-    // try
-    // {
-    //     AForm first("First", 50, 60);
-    //     AForm second("Second", 10, 20);
-
-    //     std::cout << "Before assignment:\n";
-    //     std::cout << first << std::endl;
-    //     std::cout << second << std::endl;
-
-    //     first = second;
-
-    //     std::cout << "After assignment:\n";
-    //     std::cout << first << std::endl;
-    //     std::cout << second << std::endl;
+    //     a.signForm(tree);      // fail
+    //     b.signForm(tree);      // success
+    //     b.executeForm(tree);   // fail
+    //     c.executeForm(tree);   // success
     // }
     // catch (std::exception &e)
     // {
