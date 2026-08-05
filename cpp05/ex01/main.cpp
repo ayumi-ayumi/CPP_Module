@@ -1,150 +1,128 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 int main()
 {
-	std::cout << "===== Basic construction =====" << std::endl;
-	try
-	{
-		Bureaucrat bob("Bob", 50);
+    std::cout << "========== Test 1: Valid Bureaucrat & Form ==========\n";
+    try
+    {
+        Bureaucrat bob("Bob", 42);
+        Form contract("Contract", 50, 25);
 
-		std::cout << bob << std::endl;
-		std::cout << "Name: " << bob.getName() << std::endl;
-		std::cout << "Grade: " << bob.getGrade() << std::endl;
+        std::cout << bob << std::endl;
+        std::cout << contract << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 
-		std::cout << "\n===== Increment grade =====" << std::endl;
-		bob.increaseGrade();
-		std::cout << bob << std::endl;
+    // std::cout << "\n========== Test 2: Form grade too high ==========\n";
+    // try
+    // {
+    //     Form f("Invalid", 0, 10);
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
-		std::cout << "\n===== Decrement grade =====" << std::endl;
-		bob.decreaseGrade();
-		std::cout << bob << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+    // std::cout << "\n========== Test 3: Form grade too low ==========\n";
+    // try
+    // {
+    //     Form f("Invalid", 10, 151);
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
+    // std::cout << "\n========== Test 4: Successful signing ==========\n";
+    // try
+    // {
+    //     Bureaucrat boss("Boss", 1);
+    //     Form tax("Tax Form", 50, 30);
 
-	std::cout << "\n===== Constructor exception (too high) =====" << std::endl;
-	try
-	{
-		Bureaucrat alice("Alice", 0);
-		std::cout << alice << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+    //     std::cout << tax << std::endl;
 
+    //     boss.signForm(tax);
 
-	std::cout << "\n===== Constructor exception (too low) =====" << std::endl;
-	try
-	{
-		Bureaucrat charlie("Charlie", 151);
-		std::cout << charlie << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+    //     std::cout << tax << std::endl;
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
+    // std::cout << "\n========== Test 5: Failed signing ==========\n";
+    // try
+    // {
+    //     Bureaucrat intern("Intern", 100);
+    //     Form secret("Top Secret", 20, 10);
 
-	std::cout << "\n===== Increment exception =====" << std::endl;
-	try
-	{
-		Bureaucrat high("High", 1);
+    //     std::cout << secret << std::endl;
 
-		std::cout << high << std::endl;
-		high.increaseGrade(); // should throw
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+    //     intern.signForm(secret);
 
+    //     std::cout << secret << std::endl;
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
-	std::cout << "\n===== Decrement exception =====" << std::endl;
-	try
-	{
-		Bureaucrat low("Low", 150);
+    // std::cout << "\n========== Test 6: Sign already signed form ==========\n";
+    // try
+    // {
+    //     Bureaucrat alice("Alice", 1);
+    //     Bureaucrat john("John", 10);
+    //     Form form("Agreement", 20, 20);
 
-		std::cout << low << std::endl;
-		low.decreaseGrade(); // should throw
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+    //     alice.signForm(form);
+    //     john.signForm(form);
 
+    //     std::cout << form << std::endl;
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
-	std::cout << "\n===== Copy constructor =====" << std::endl;
-	try
-	{
-		Bureaucrat original("Original", 42);
-		Bureaucrat copy(original);
+    // std::cout << "\n========== Test 7: Copy constructor ==========\n";
+    // try
+    // {
+    //     Form original("Original", 30, 40);
+    //     Form copy(original);
 
-		std::cout << "Original: " << original << std::endl;
-		std::cout << "Copy:     " << copy << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+    //     std::cout << original << std::endl;
+    //     std::cout << copy << std::endl;
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
+    // std::cout << "\n========== Test 8: Assignment operator ==========\n";
+    // try
+    // {
+    //     Form first("First", 50, 60);
+    //     Form second("Second", 10, 20);
 
-	std::cout << "\n===== Assignment operator =====" << std::endl;
-	try
-	{
-		Bureaucrat a("A", 100);
-		Bureaucrat b("B", 20);
+    //     std::cout << "Before assignment:\n";
+    //     std::cout << first << std::endl;
+    //     std::cout << second << std::endl;
 
-		std::cout << "Before assignment:" << std::endl;
-		std::cout << a << std::endl;
-		std::cout << b << std::endl;
+    //     first = second;
 
-		a = b;
+    //     std::cout << "After assignment:\n";
+    //     std::cout << first << std::endl;
+    //     std::cout << second << std::endl;
+    // }
+    // catch (std::exception &e)
+    // {
+    //     std::cout << e.what() << std::endl;
+    // }
 
-		std::cout << "After assignment:" << std::endl;
-		std::cout << a << std::endl;
-		std::cout << b << std::endl;
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-
-	return 0;
+    return 0;
 }
-
-/*
-===== Basic construction =====
-Bob, bureaucrat grade 50
-Name: Bob
-Grade: 50
-
-===== Increment grade =====
-Bob, bureaucrat grade 49
-
-===== Decrement grade =====
-Bob, bureaucrat grade 50
-
-===== Constructor exception (too high) =====
-Exception: Grade too high
-
-===== Constructor exception (too low) =====
-Exception: Grade too low
-
-===== Increment exception =====
-High, bureaucrat grade 1
-Exception: Grade too high
-
-===== Decrement exception =====
-Low, bureaucrat grade 150
-Exception: Grade too low
-
-===== Copy constructor =====
-Original: Original, bureaucrat grade 42
-Copy:     Original, bureaucrat grade 42
-
-*/
