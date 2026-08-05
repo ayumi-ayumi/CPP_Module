@@ -1,4 +1,4 @@
-NAME = animal
+NAME = bureaucrat
 
 CXX = c++
 
@@ -11,6 +11,9 @@ OBJ_DIR = obj
 SRCS_FILES = main.cpp \
 		AForm.cpp \
 		Bureaucrat.cpp \
+		ShrubberyCreationForm.cpp \
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.cpp=.o))
