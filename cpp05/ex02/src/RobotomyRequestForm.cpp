@@ -1,7 +1,5 @@
 #include "RobotomyRequestForm.hpp"
-#include <string>
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("", 72, 45) {}
@@ -20,7 +18,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {}
 
 void RobotomyRequestForm::action() const
 {
-	std::cout << "Gggggggzzzzzzzzjjjjj........" <<std::endl;
+	std::cout << "Gggggggzzzzzzzzjjjjj........" << std::endl;
 	if (rand() % 2 == 0)
 		std::cout << _target << " has been robotomized successfully" << std::endl;
 	else

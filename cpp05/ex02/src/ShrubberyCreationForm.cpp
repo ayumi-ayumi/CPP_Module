@@ -1,5 +1,4 @@
 #include "ShrubberyCreationForm.hpp"
-#include <string>
 #include <iostream>
 #include <fstream>
 
@@ -24,7 +23,7 @@ void ShrubberyCreationForm::action() const
 	if (!fileout)
 	{
 		std::cerr << "|--- Failed to create a file ---|" << std::endl;
-		std::exit(1);
+		return ;
 	}
 	fileout << "        *              *              *\n";
 	fileout << "       ***            ***            ***\n";
