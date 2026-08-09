@@ -18,8 +18,8 @@ class Bureaucrat
 		const std::string&	getName() const;
 		int					getGrade() const;
 
-		void				increaseGrade(); // grade++;
-		void				decreaseGrade(); // grade--;
+		void				increaseGrade(); // grade--;
+		void				decreaseGrade(); // grade++;
 
 		void				signForm(Form& form);
 
@@ -32,12 +32,12 @@ class Bureaucrat
 		{
 			const char*		what() const throw();
 		};
-		
+
 	private:
 		const std::string	_name;
 		int					_grade;
 };
 
-std::ostream& operator<<(std::ostream &out, const Bureaucrat& other);
+std::ostream& operator<<(std::ostream &out, const Bureaucrat& input);
 
 #endif

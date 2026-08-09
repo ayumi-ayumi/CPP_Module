@@ -1,17 +1,17 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Form::Form() : _name(""), _isSigned(false), _requiredGrade(150), _executedGrade(150) {}
+Form::Form() : _name(""), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {}
 
-Form::Form(const std::string &formName, int requiredGrade, int executedGrade) : _name(formName), _isSigned(false), _requiredGrade(requiredGrade), _executedGrade(executedGrade)
+Form::Form(const std::string &formName, int requiredGrade, int executedGrade) : _name(formName), _isSigned(false), _gradeToSign(requiredGrade), _gradeToExecute(executedGrade)
 {
-	if (_requiredGrade < 1 || _executedGrade < 1)
+	if (_gradeToSign < 1 || _gradeToExecute < 1)
 		throw (GradeTooHighException());
-	if (_requiredGrade > 150 || _executedGrade > 150)
+	if (_gradeToSign > 150 || _gradeToExecute > 150)
 		throw (GradeTooLowException());
 }
 
-Form::Form(const Form& other) : _name(other._name), _isSigned(other._isSigned), _requiredGrade(other._requiredGrade), _executedGrade(other._executedGrade) {}
+Form::Form(const Form& other) : _name(other._name), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute) {}
 
 Form& Form::operator=(const Form& other)
 {
@@ -32,19 +32,19 @@ bool Form::getIsSigned() const
 	return (_isSigned);
 }
 
-int Form::getRequiredGrade() const
+int Form::getGradeToSign() const
 {
-	return (_requiredGrade);
+	return (_gradeToSign);
 }
 
-int Form::getExecutedGrade() const
+int Form::getGradeToExecute() const
 {
-	return (_executedGrade);
+	return (_gradeToExecute);
 }
 
 void Form::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() <= _requiredGrade)
+	if (bureaucrat.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else
 		throw (GradeTooLowException());
@@ -60,11 +60,11 @@ const char* Form::GradeTooLowException::what() const throw()
 	return ("Grade is too low");
 }
 
-std::ostream& operator<<(std::ostream &out, const Form& other)
+std::ostream& operator<<(std::ostream &out, const Form& input)
 {
-	out << other.getName() 
-	<< ", form signed: " << (other.getIsSigned() ? "Yes" : "No")
-	<< ", required grade is " << other.getRequiredGrade()
-	<< ", executed grade is " << other.getExecutedGrade();
+	out << "The name: " << input.getName()
+	<< ", the form signed: " << (input.getIsSigned() ? "Yes" : "No")
+	<< ", the grade to sign: " << input.getGradeToSign()
+	<< ", the grade to execute: " << input.getGradeToExecute();
 	return (out);
 }

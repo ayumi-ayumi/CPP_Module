@@ -4,125 +4,125 @@
 
 int main()
 {
-    std::cout << "========== Test 1: Valid Bureaucrat & Form ==========\n";
-    try
-    {
-        Bureaucrat bob("Bob", 42);
-        Form contract("Contract", 50, 25);
+	// std::cout << "========== Test 1: Valid Bureaucrat & Form ==========\n";
+	// try
+	// {
+	//     Bureaucrat bob("Bob", 42);
+	//     Form contract("Contract", 50, 25);
 
-        std::cout << bob << std::endl;
-        std::cout << contract << std::endl;
-    }
-    catch (std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+	//     std::cout << bob << std::endl;
+	//     std::cout << contract << std::endl;
+	// }
+	// catch (std::exception &e)
+	// {
+	//     std::cout << e.what() << std::endl;
+	// }
 
-    // std::cout << "\n========== Test 2: Form grade too high ==========\n";
-    // try
-    // {
-    //     Form f("Invalid", 0, 10);
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+	// std::cout << "\n========== Test 2: Form grade too high ==========\n";
+	// try
+	// {
+	//     Form f("Invalid", 0, 10);
+	// }
+	// catch (std::exception &e)
+	// {
+	//     std::cout << e.what() << std::endl;
+	// }
 
-    // std::cout << "\n========== Test 3: Form grade too low ==========\n";
-    // try
-    // {
-    //     Form f("Invalid", 10, 151);
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+	// std::cout << "\n========== Test 3: Form grade too low ==========\n";
+	// try
+	// {
+	//     Form f("Invalid", 10, 151);
+	// }
+	// catch (std::exception &e)
+	// {
+	//     std::cout << e.what() << std::endl;
+	// }
 
-    // std::cout << "\n========== Test 4: Successful signing ==========\n";
-    // try
-    // {
-    //     Bureaucrat boss("Boss", 1);
-    //     Form tax("Tax Form", 50, 30);
+	std::cout << "\n========== Test 4: Successful signing ==========\n";
+	try
+	{
+		Bureaucrat boss("Boss", 1);
+		Form tax("Tax Form", 50, 30);
 
-    //     std::cout << tax << std::endl;
+		std::cout << tax << std::endl;
 
-    //     boss.signForm(tax);
+		boss.signForm(tax);
 
-    //     std::cout << tax << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+		std::cout << tax << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
-    // std::cout << "\n========== Test 5: Failed signing ==========\n";
-    // try
-    // {
-    //     Bureaucrat intern("Intern", 100);
-    //     Form secret("Top Secret", 20, 10);
+	std::cout << "\n========== Test 5: Failed signing ==========\n";
+	try
+	{
+		Bureaucrat intern("Intern", 100);
+		Form secret("Top Secret", 20, 10);
 
-    //     std::cout << secret << std::endl;
+		std::cout << secret << std::endl;
 
-    //     intern.signForm(secret);
+		intern.signForm(secret);
 
-    //     std::cout << secret << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+		std::cout << secret << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
-    // std::cout << "\n========== Test 6: Sign already signed form ==========\n";
-    // try
-    // {
-    //     Bureaucrat alice("Alice", 1);
-    //     Bureaucrat john("John", 10);
-    //     Form form("Agreement", 20, 20);
+	std::cout << "\n========== Test 6: Sign already signed form ==========\n";
+	try
+	{
+		Bureaucrat alice("Alice", 1);
+		Bureaucrat john("John", 10);
+		Form form("Agreement", 20, 20);
 
-    //     alice.signForm(form);
-    //     john.signForm(form);
+		alice.signForm(form);
+		john.signForm(form);
 
-    //     std::cout << form << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+		std::cout << form << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 
-    // std::cout << "\n========== Test 7: Copy constructor ==========\n";
-    // try
-    // {
-    //     Form original("Original", 30, 40);
-    //     Form copy(original);
+	// std::cout << "\n========== Test 7: Copy constructor ==========\n";
+	// try
+	// {
+	//     Form original("Original", 30, 40);
+	//     Form copy(original);
 
-    //     std::cout << original << std::endl;
-    //     std::cout << copy << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+	//     std::cout << original << std::endl;
+	//     std::cout << copy << std::endl;
+	// }
+	// catch (std::exception &e)
+	// {
+	//     std::cout << e.what() << std::endl;
+	// }
 
-    // std::cout << "\n========== Test 8: Assignment operator ==========\n";
-    // try
-    // {
-    //     Form first("First", 50, 60);
-    //     Form second("Second", 10, 20);
+	// std::cout << "\n========== Test 8: Assignment operator ==========\n";
+	// try
+	// {
+	//     Form first("First", 50, 60);
+	//     Form second("Second", 10, 20);
 
-    //     std::cout << "Before assignment:\n";
-    //     std::cout << first << std::endl;
-    //     std::cout << second << std::endl;
+	//     std::cout << "Before assignment:\n";
+	//     std::cout << first << std::endl;
+	//     std::cout << second << std::endl;
 
-    //     first = second;
+	//     first = second;
 
-    //     std::cout << "After assignment:\n";
-    //     std::cout << first << std::endl;
-    //     std::cout << second << std::endl;
-    // }
-    // catch (std::exception &e)
-    // {
-    //     std::cout << e.what() << std::endl;
-    // }
+	//     std::cout << "After assignment:\n";
+	//     std::cout << first << std::endl;
+	//     std::cout << second << std::endl;
+	// }
+	// catch (std::exception &e)
+	// {
+	//     std::cout << e.what() << std::endl;
+	// }
 
-    return 0;
+	return 0;
 }
