@@ -8,7 +8,7 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("", 72, 45) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm(target, 72, 45) , _target(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other.getName(), other.getRequiredGrade(), other.getExecutedGrade()), _target(other._target) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()), _target(other._target) {}
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
 {
