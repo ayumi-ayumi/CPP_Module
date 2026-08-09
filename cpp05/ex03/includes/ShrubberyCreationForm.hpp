@@ -1,0 +1,19 @@
+#ifndef _SHRUBBERY_H_
+#define _SHRUBBERY_H_
+#include "AForm.hpp"
+#include <string>
+
+class ShrubberyCreationForm : public AForm
+{
+	public:
+		ShrubberyCreationForm();
+		ShrubberyCreationForm(const std::string& target);
+		ShrubberyCreationForm(const ShrubberyCreationForm& other);
+		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
+		~ShrubberyCreationForm();
+		
+		void				action() const;
+		const std::string	_target;
+};
+
+#endif
