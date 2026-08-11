@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include <iostream>
 
 AForm::AForm() : _name(""), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {}
 
@@ -20,7 +21,10 @@ AForm& AForm::operator=(const AForm& other)
 	return (*this);
 }
 
-AForm::~AForm() {}
+AForm::~AForm() 
+{
+	std::cout << "The form is destroyed" << std::endl;
+}
 
 const std::string& AForm::getName() const
 {

@@ -1,154 +1,145 @@
+#include "Intern.hpp"
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
+
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 
 int main()
 {
-	std::srand(std::time(NULL));
-
-	std::cout << "========== Test 1: Shrubbery ==========\n";
-	try
+	std::cout << "========== TEST 1: Shrubbery Creation ==========" << std::endl;
 	{
-		Bureaucrat bob("Bob", 1);
-		ShrubberyCreationForm tree("garden");
-
-		bob.signForm(tree);
-		bob.executeForm(tree);
-
-		std::cout << "Check that 'garden_shrubbery' was created.\n";
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	std::cout << "\n========== Test 2: Execute unsigned form ==========\n";
-	try
-	{
-		Bureaucrat bob("Bob", 1);
-		ShrubberyCreationForm tree("home");
-
-		bob.executeForm(tree);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	std::cout << "\n========== Test 3: Grade too low to sign ==========\n";
-	try
-	{
-		Bureaucrat low("Low", 150);
-		ShrubberyCreationForm tree("forest");
-
-		low.signForm(tree);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	std::cout << "\n========== Test 4: Grade too low to execute ==========\n";
-	try
-	{
-		Bureaucrat signer("Signer", 100);
-		Bureaucrat executor("Executor", 140);
-
-		ShrubberyCreationForm tree("park");
-
-		signer.signForm(tree);
-		executor.executeForm(tree);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-
-	std::cout << "\n========== Test 5: Robotomy ==========\n";
-	try
-	{
-		Bureaucrat boss("Boss", 1);
-		RobotomyRequestForm robot("Bender");
-
-		boss.signForm(robot);
-
-		for (int i = 0; i < 5; i++)
+		try
 		{
-			std::cout << "Attempt " << i + 1 << ":" << std::endl;
-			boss.executeForm(robot);
+			Intern intern;
+			Bureaucrat boss("Boss", 1);
+
+			AForm* form = intern.makeForm("shrubbery creation", "garden");
+
+			std::cout << *form << std::endl;
+
+			boss.signForm(*form);
+			boss.executeForm(*form);
+
+			delete form;
+		}
+		catch (std::exception& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
 		}
 	}
-	catch (std::exception &e)
+
+	std::cout << "\n========== TEST 2: Robotomy Request ==========" << std::endl;
 	{
-		std::cout << e.what() << std::endl;
+		try
+		{
+			Intern intern;
+			Bureaucrat boss("Boss", 1);
+
+			AForm* form = intern.makeForm("robotomy request", "Bender");
+
+			std::cout << *form << std::endl;
+
+			boss.signForm(*form);
+
+			for (int i = 0; i < 5; i++)
+			{
+				std::cout << "Attempt " << i + 1 << ":" << std::endl;
+				boss.executeForm(*form);
+			}
+
+			delete form;
+		}
+		catch (std::exception& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
+		}
 	}
 
-	std::cout << "\n========== Test 6: Presidential Pardon ==========\n";
-	try
+	std::cout << "\n========== TEST 3: Presidential Pardon ==========" << std::endl;
 	{
-		Bureaucrat president("President", 1);
-		PresidentialPardonForm pardon("Arthur Dent");
+		try
+		{
+			Intern intern;
+			Bureaucrat president("President", 1);
 
-		president.signForm(pardon);
-		president.executeForm(pardon);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+			AForm* form = intern.makeForm("presidential pardon", "Arthur Dent");
 
-	std::cout << "\n========== Test 7: Increasement ==========\n";
+			std::cout << *form << std::endl;
 
-	try
-	{
-		Bureaucrat ayumi("Ayumi", 138);
-		ShrubberyCreationForm airport("Airport");
+			president.signForm(*form);
+			president.executeForm(*form);
 
-		ayumi.signForm(airport);
-		ayumi.executeForm(airport);
-		std::cout << "Increase 1 grade" << std::endl;
-		ayumi.increaseGrade();
-		ayumi.executeForm(airport);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << e.what() << std::endl;
+			delete form;
+		}
+		catch (std::exception& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
+		}
 	}
 
+	std::cout << "\n========== TEST 4: Unknown Form ==========" << std::endl;
+	{
+		try
+		{
+			Intern intern;
 
-	// std::cout << "\n========== Test 7: Form constructor exceptions ==========\n";
-	// try
-	// {
-	// 	ShrubberyCreationForm bad("");
-	// 	Bureaucrat invalid("Invalid", 0);
-	// }
-	// catch (std::exception &e)
-	// {
-	// 	std::cout << e.what() << std::endl;
-	// }
+			AForm* form = intern.makeForm("some random form", "target");
 
-	// std::cout << "\n========== Test 8: Different Bureaucrat grades ==========\n";
-	// try
-	// {
-	// 	Bureaucrat a("A", 150);
-	// 	Bureaucrat b("B", 145);
-	// 	Bureaucrat c("C", 137);
+			delete form;
+		}
+		catch (std::exception& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
+		}
+	}
 
-	// 	ShrubberyCreationForm tree("school");
+	std::cout << "\n========== TEST 5: Grade Too Low ==========" << std::endl;
+	{
+		try
+		{
+			Intern intern;
+			Bureaucrat lowGrade("LowGrade", 150);
 
-	// 	a.signForm(tree);      // fail
-	// 	b.signForm(tree);      // success
-	// 	b.executeForm(tree);   // fail
-	// 	c.executeForm(tree);   // success
-	// }
-	// catch (std::exception &e)
-	// {
-	// 	std::cout << e.what() << std::endl;
-	// }
+			AForm* form = intern.makeForm("shrubbery creation", "garden");
+
+			lowGrade.signForm(*form);
+			lowGrade.executeForm(*form);
+
+			delete form;
+		}
+		catch (std::exception& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
+		}
+	}
+
+	std::cout << "\n========== TEST 6: Direct Form Creation Through Intern ==========" << std::endl;
+	{
+		Intern intern;
+
+		AForm* form1 = NULL;
+		AForm* form2 = NULL;
+		AForm* form3 = NULL;
+
+		try
+		{
+			form1 = intern.makeForm("shrubbery creation", "tree");
+			form2 = intern.makeForm("robotomy request", "robot");
+			form3 = intern.makeForm("presidential pardon", "criminal");
+
+			std::cout << "Form 1: " << *form1 << std::endl;
+			std::cout << "Form 2: " << *form2 << std::endl;
+			std::cout << "Form 3: " << *form3 << std::endl;
+		}
+		catch (std::exception& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
+		}
+
+		delete form1;
+		delete form2;
+		delete form3;
+	}
 
 	return 0;
 }
