@@ -3,7 +3,7 @@
 
 AForm::AForm() : _name(""), _isSigned(false), _gradeToSign(150), _gradeToExecute(150) {}
 
-AForm::AForm(const std::string &formName, int requiredGrade, int executedGrade) : _name(formName), _isSigned(false), _gradeToSign(requiredGrade), _gradeToExecute(executedGrade)
+AForm::AForm(const std::string &formName, int gradeToSign, int gradeToExecute) : _name(formName), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
 	if (_gradeToSign < 1 || _gradeToExecute < 1)
 		throw (GradeTooHighException());
@@ -77,9 +77,9 @@ const char* AForm::FormNotSignedException::what() const throw()
 
 std::ostream& operator<<(std::ostream &out, const AForm& input)
 {
-	out << input.getName()
-	<< ", form signed: " << (input.getIsSigned() ? "Yes" : "No")
-	<< ", required grade is " << input.getGradeToSign()
-	<< ", executed grade is " << input.getGradeToExecute();
+	out << "Form name: " << input.getName()
+	<< ", Form signed: " << (input.getIsSigned() ? "Yes" : "No")
+	<< ", Grade to sign: " << input.getGradeToSign()
+	<< ", Grade to execute: " << input.getGradeToExecute();
 	return (out);
 }

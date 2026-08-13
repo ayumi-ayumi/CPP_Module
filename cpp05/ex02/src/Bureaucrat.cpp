@@ -60,7 +60,7 @@ void Bureaucrat::signForm(AForm& form)
 	}
 }
 
-void Bureaucrat::executeForm(AForm const & form) const
+void Bureaucrat::executeForm(AForm const &form) const
 {
 	try
 	{
@@ -75,7 +75,7 @@ void Bureaucrat::executeForm(AForm const & form) const
 
 std::ostream& operator<<(std::ostream &out, const Bureaucrat& input)
 {
-	out << input.getName() << ", bureaucrat grade " << input.getGrade();
+	out << "Bureaucrat name: " << input.getName() << ", Bureaucrat grade: " << input.getGrade();
 	return (out);
 }
 
