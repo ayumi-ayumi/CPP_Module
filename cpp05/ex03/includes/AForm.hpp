@@ -1,5 +1,5 @@
-#ifndef _FORM_H_
-#define _FORM_H_
+#ifndef _AFORM_H_
+#define _AFORM_H_
 #include "Bureaucrat.hpp"
 #include <string>
 #include <ostream>
@@ -10,11 +10,11 @@ class AForm
 {
 	public:
 		AForm();
-		AForm(const std::string &formName, int requiredGrade, int executedGrade);
+		AForm(const std::string &formName, int gradeToSign, int gradeToExecute);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
-		
 		virtual ~AForm();
+		
 		const std::string&	getName() const;
 		bool				getIsSigned() const;
 		int					getGradeToSign() const;

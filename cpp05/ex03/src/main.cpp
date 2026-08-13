@@ -13,7 +13,7 @@ int main()
 			Intern intern;
 			Bureaucrat boss("Boss", 1);
 
-			AForm* form = intern.makeForm("shrubbery creation", "garden");
+			AForm* form = intern.makeForm("ShrubberyCreationForm", "garden");
 
 			std::cout << *form << std::endl;
 
@@ -35,7 +35,7 @@ int main()
 			Intern intern;
 			Bureaucrat boss("Boss", 1);
 
-			AForm* form = intern.makeForm("robotomy request", "Bender");
+			AForm* form = intern.makeForm("RobotomyRequestForm", "Bender");
 
 			std::cout << *form << std::endl;
 
@@ -62,7 +62,7 @@ int main()
 			Intern intern;
 			Bureaucrat president("President", 1);
 
-			AForm* form = intern.makeForm("presidential pardon", "Arthur Dent");
+			AForm* form = intern.makeForm("PresidentialPardonForm", "Arthur Dent");
 
 			std::cout << *form << std::endl;
 
@@ -100,7 +100,7 @@ int main()
 			Intern intern;
 			Bureaucrat lowGrade("LowGrade", 150);
 
-			AForm* form = intern.makeForm("shrubbery creation", "garden");
+			AForm* form = intern.makeForm("ShrubberyCreationForm", "garden");
 
 			lowGrade.signForm(*form);
 			lowGrade.executeForm(*form);
@@ -123,9 +123,9 @@ int main()
 
 		try
 		{
-			form1 = intern.makeForm("shrubbery creation", "tree");
-			form2 = intern.makeForm("robotomy request", "robot");
-			form3 = intern.makeForm("presidential pardon", "criminal");
+			form1 = intern.makeForm("ShrubberyCreationForm", "tree");
+			form2 = intern.makeForm("RobotomyRequestForm", "robot");
+			form3 = intern.makeForm("PresidentialPardonForm", "criminal");
 
 			std::cout << "Form 1: " << *form1 << std::endl;
 			std::cout << "Form 2: " << *form2 << std::endl;

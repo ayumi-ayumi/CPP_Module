@@ -33,26 +33,26 @@ int findIdx(std::string forms[], std::string name)
 
 AForm* Intern::makeForm(std::string name, std::string target)
 {
-	std::string forms[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+	std::string forms[3] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
 	int nameIdx = findIdx(forms, name);
 
 	switch (nameIdx)
 	{
-	case 0:
-		std::cout << "Intern creates " << target << std::endl;
-		return (new ShrubberyCreationForm(target));
-		break;
-	case 1:
-		std::cout << "Intern creates " << target << std::endl;
-		return (new RobotomyRequestForm(target));
-		break;
-	case 2:
-		std::cout << "Intern creates " << target << std::endl;
-		return (new PresidentialPardonForm(target));
-		break;
-	default:
-		std::cout << "There is no form named " << target << std::endl;
-		return (NULL);
-		break;
+		case 0:
+			std::cout << "Intern creates " << target << std::endl;
+			return (new ShrubberyCreationForm(target));
+			break;
+		case 1:
+			std::cout << "Intern creates " << target << std::endl;
+			return (new RobotomyRequestForm(target));
+			break;
+		case 2:
+			std::cout << "Intern creates " << target << std::endl;
+			return (new PresidentialPardonForm(target));
+			break;
+		default:
+			std::cout << "There is no form named " << target << std::endl;
+			return (NULL);
+			break;
 	}
 }
