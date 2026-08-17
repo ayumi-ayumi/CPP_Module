@@ -3,6 +3,7 @@
 #include <string>
 #include <cctype>
 #include <iomanip>
+#include <limits>
 
 ScalarConverter::ScalarConverter() {}
 
@@ -33,18 +34,6 @@ enum Type{
 
 bool isInt(const std::string &str)
 {
-	try
-	{
-		stoi(str);
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << "char: impossible" << std::endl;
-		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: nanf" << std::endl;
-		std::cout << "double: nan" << std::endl;
-	}
-	
 	int i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
@@ -58,31 +47,31 @@ bool isInt(const std::string &str)
 	return (true);
 }
 
-void checkInput(const std::string &str, int &type, int &isNegative)
+int detectType(const std::string &str, int &isNegative)
 {
 	if (str[0] == '-')
 		isNegative = 1;
 	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
-		type = CHAR;
+		return (CHAR);
 	else if (str == "nan")
-		type = NAN;
+		return (NAN);
 	else if (str == "nanf")
-		type = NANF;
+		return (NANF);
 	else if (str[str.length() - 1] == 'f')
-		type = FLOAT;
+		return (FLOAT);
 	else if (str[str.length() - 2] == '.')
-		type = DOUBLE;
+		return (DOUBLE);
 	else if (isInt(str))
-		type = INT;
+		return (INT);
 	else
-		type = INVALID;
+		return (INVALID);
 }
 
 void ScalarConverter::convert(const std::string &str)
 {
-	int type;
 	int isNegative;
-	checkInput(str, type, isNegative);
+	int type = detectType(str, isNegative);
+	
 	if (type == INVALID)
 	{
 		std::cout << "Invalid input, it cannot be detected" << std::endl;
@@ -90,12 +79,16 @@ void ScalarConverter::convert(const std::string &str)
 	}
 	if (type == FLOAT)
 	{
-		std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
-		std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
+		// float a = stoll(str);
+		std::cout << std::numeric_limits<float>::min() << std::endl;
+		if (static_cast<float>(stoll(str))  < std::numeric_limits<float>::min())
+			std::cout << "impossible" << std::endl;
+		// std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
+		// std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
+		// std::cout << std::fixed << std::setprecision(1);
+		// std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
+		// std::cout << std::fixed << std::setprecision(1);
+		// std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
 	}
 	if (type == DOUBLE)
 	{
