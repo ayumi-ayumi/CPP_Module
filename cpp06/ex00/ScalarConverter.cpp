@@ -81,6 +81,7 @@ void ScalarConverter::convert(const std::string &str)
 	{
 		// float a = stoll(str);
 		std::cout << std::numeric_limits<float>::min() << std::endl;
+		std::cout << (stoll(str))  << std::endl;
 		if (static_cast<float>(stoll(str))  < std::numeric_limits<float>::min())
 			std::cout << "impossible" << std::endl;
 		// std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
