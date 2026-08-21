@@ -1,9 +1,14 @@
+
 #include "ScalarConverter.hpp"
 #include <iostream>
 #include <string>
 #include <cctype>
 #include <iomanip>
 #include <limits>
+#include <cstdlib>
+#include <sstream>
+#include <cerrno>
+
 
 ScalarConverter::ScalarConverter() {}
 
@@ -25,8 +30,8 @@ enum Type{
 	INT,
 	FLOAT,
 	DOUBLE,
-	NAN,
-	NANF,
+	D_PSEUDO,
+	F_PSEUDO,
 	INF,
 	INFF,
 	INVALID
@@ -53,10 +58,10 @@ int detectType(const std::string &str, int &isNegative)
 		isNegative = 1;
 	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
 		return (CHAR);
-	else if (str == "nan")
-		return (NAN);
-	else if (str == "nanf")
-		return (NANF);
+	else if (str == "nan" || str == "+inf" || str == "-inf")
+		return (D_PSEUDO);
+	else if (str == "nanf" || str == "+inff" || str == "-inff")
+		return (F_PSEUDO);
 	else if (str[str.length() - 1] == 'f')
 		return (FLOAT);
 	else if (str[str.length() - 2] == '.')
@@ -69,21 +74,69 @@ int detectType(const std::string &str, int &isNegative)
 
 void ScalarConverter::convert(const std::string &str)
 {
-	int isNegative;
+	int isNegative = 0;
 	int type = detectType(str, isNegative);
-	
+
 	if (type == INVALID)
 	{
 		std::cout << "Invalid input, it cannot be detected" << std::endl;
 		return;
 	}
+
 	if (type == FLOAT)
 	{
+		errno = 0;
+		char *end;
+		float value = strtof(str.c_str(), &end);
+		if (errno == ERANGE)
+		{
+			std::cout << "float: impossible" << std::endl;
+			std::cout << "char: impossible" << std::endl;
+		}
+		else
+		{
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << "float: " << value << "f" << std::endl;
+			if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
+			{
+				if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
+					std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
+				else
+					std::cout << "char: Non displayable" << std::endl;
+			}
+			else
+				std::cout << "char: impossible" << std::endl;
+		}
+		errno = 0;
+		end = NULL;
+		double value_double = strtod(str.c_str(), &end);
+		if (errno == ERANGE)
+			std::cout << "double: impossible" << std::endl;
+		else
+		{
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << "double: " << value_double << std::endl;
+		}
+		errno = 0;
+		end = NULL;
+		long value_int = strtol(str.c_str(), &end, 10);
+		if (value_int >= std::numeric_limits<int>::max() || value_int <= std::numeric_limits<int>::min())
+			std::cout << "int: impossible" << std::endl;
+		// if (errno == ERANGE)
+		// 	std::cout << "int: impossible" << std::endl;
+		else
+			std::cout << "int: " << value_int << std::endl;
+
+		// std::stringstream ss;
+		// int value;
+		// ss << str;
+		// ss >> value;
+		// std::cout << value << std::endl;
 		// float a = stoll(str);
-		std::cout << std::numeric_limits<float>::min() << std::endl;
-		std::cout << (stoll(str))  << std::endl;
-		if (static_cast<float>(stoll(str))  < std::numeric_limits<float>::min())
-			std::cout << "impossible" << std::endl;
+		// std::cout << std::numeric_limits<float>::min() << std::endl;
+		// std::cout << (stoll(str))  << std::endl;
+		// if (static_cast<float>(stoll(str))  < std::numeric_limits<float>::min())
+		// 	std::cout << "impossible" << std::endl;
 		// std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
 		// std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
 		// std::cout << std::fixed << std::setprecision(1);
@@ -91,60 +144,68 @@ void ScalarConverter::convert(const std::string &str)
 		// std::cout << std::fixed << std::setprecision(1);
 		// std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
 	}
-	if (type == DOUBLE)
+	// if (type == DOUBLE)
+	// {
+	// 	if (isNegative)
+	// 		std::cout << "char: impossible" << std::endl;
+	// 	else
+	// 		std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
+	// 	std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
+	// 	std::cout << std::fixed << std::setprecision(1);
+	// 	std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
+	// 	std::cout << std::fixed << std::setprecision(1);
+	// 	std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
+	// }
+	// if (type == CHAR)
+	// {
+	// 	char c = str[1];
+	// 	std::cout << "char: " << str << std::endl;
+	// 	std::cout << "int: " << static_cast<int>(c)<< std::endl;
+	// 	std::cout << std::fixed << std::setprecision(1);
+	// 	std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
+	// 	std::cout << std::fixed << std::setprecision(1);
+	// 	std::cout << "double: " << static_cast<double>(c) << std::endl;
+	// }
+	// if (type == INT)
+	// {
+	// 	if (isNegative)
+	// 		std::cout << "char: impossible" << std::endl;
+	// 	else
+	// 		std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
+	// 	std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
+	// 	std::cout << std::fixed << std::setprecision(1);
+	// 	std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
+	// 	std::cout << std::fixed << std::setprecision(1);
+	// 	std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
+	// }
+	if (type == F_PSEUDO)
 	{
-		if (isNegative)
-			std::cout << "char: impossible" << std::endl;
-		else
-			std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
-		std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
+		std::string sub_str = str.substr(0, str.length() - 1);
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: " << sub_str<< "f" << std::endl;
+		std::cout << "double: " << sub_str << std::endl;
 	}
-	if (type == CHAR)
-	{
-		char c = str[1];
-		std::cout << "char: " << str << std::endl;
-		std::cout << "int: " << static_cast<int>(c)<< std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "double: " << static_cast<double>(c) << std::endl;
-	}
-	if (type == INT)
-	{
-		if (isNegative)
-			std::cout << "char: impossible" << std::endl;
-		else
-			std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
-		std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
-	}
-	if (type == NAN || type == NANF)
+	if (type == D_PSEUDO)
 	{
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
-		std::cout << "float: nanf" << std::endl;
-		std::cout << "double: nan" << std::endl;
+		std::cout << "float: " << str << "f" << std::endl;
+		std::cout << "double: " << str << std::endl;
 	}
-	if (type == INF || type == INFF)
-	{
-		std::cout << "char: impossible" << std::endl;
-		std::cout << "int: impossible" << std::endl;
-		if (isNegative)
-		{
-			std::cout << "float: -inff" << std::endl;
-			std::cout << "double: -inf" << std::endl;
-		}
-		else
-		{
-			std::cout << "float: inff" << std::endl;
-			std::cout << "double: inf" << std::endl;
-		}
-	}
+	// if (type == INF || type == INFF)
+	// {
+	// 	std::cout << "char: impossible" << std::endl;
+	// 	std::cout << "int: impossible" << std::endl;
+	// 	if (isNegative)
+	// 	{
+	// 		std::cout << "float: -inff" << std::endl;
+	// 		std::cout << "double: -inf" << std::endl;
+	// 	}
+	// 	else
+	// 	{
+	// 		std::cout << "float: inff" << std::endl;
+	// 		std::cout << "double: inf" << std::endl;
+	// 	}
+	// }
 }
