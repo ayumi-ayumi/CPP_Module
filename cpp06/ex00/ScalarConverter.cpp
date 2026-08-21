@@ -227,18 +227,32 @@ void ScalarConverter::convert(const std::string &str)
 	// 	std::cout << std::fixed << std::setprecision(1);
 	// 	std::cout << "double: " << static_cast<double>(c) << std::endl;
 	// }
-	// if (type == INT)
-	// {
-	// 	if (isNegative)
-	// 		std::cout << "char: impossible" << std::endl;
-	// 	else
-	// 		std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
-	// 	std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
-	// 	std::cout << std::fixed << std::setprecision(1);
-	// 	std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
-	// 	std::cout << std::fixed << std::setprecision(1);
-	// 	std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
-	// }
+	if (type == INT)
+	{
+		char *end;
+		long value = strtol(str.c_str(), &end, 10);
+		if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+		{
+			std::cout << "int: impossible" << std::endl;
+			std::cout << "char: impossible" << std::endl;
+		}
+		else
+		{
+			int num = static_cast<int>(value);
+			std::cout << "int: " << num << std::endl;
+			std::cout << "double: " << num << ".0" << std::endl;
+			std::cout << "float: " << num << ".0f" << std::endl;
+			if (num >= 0 && num <= 127)
+			{
+				if (num > 31 && num < 127)
+					std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
+				else
+					std::cout << "char: Non displayable" << std::endl;
+			}
+			else
+				std::cout << "char: impossible" << std::endl;
+		}
+	}
 	if (type == F_PSEUDO)
 	{
 		std::string sub_str = str.substr(0, str.length() - 1);
