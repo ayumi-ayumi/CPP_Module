@@ -78,17 +78,6 @@ int isAllDigit(std::string str)
 	return (1);
 }
 
-// int isChar(std::string str)
-// {
-// 	char *end;
-// 	long num = strtol(str.c_str(), &end, 10);
-// 	std::cout << num << std::endl;
-
-// 	if (num >= 0 && num <= 9)
-// 		return (0);
-// 	return (1);
-// }
-
 int detectType(const std::string &str, int &isNegative)
 {
 	if (str[0] == '-')
@@ -105,7 +94,6 @@ int detectType(const std::string &str, int &isNegative)
 	else if (isInt(str))
 		return (INT);
 	else if (str.length() == 1)
-	// if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
 		return (CHAR);
 	else
 		return (INVALID);
@@ -116,29 +104,73 @@ void countFloat(std::string str, int &n)
 	size_t i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
-	while (i < str.length())
+	while (isdigit(str[i]))
+		i++;
+	if (str[i] == '.')
+		i++;
+	while (isdigit(str[i]) && i < str.length())
 	{
-		if (isdigit(str[i]))
-			i++;
-		if (str[i] == '.')
-		{
-			i++;
-			if (str[i] == '0')
-			{
-				i++;
-				n++;
-			}
-			if (str[i] == 'f')
-				return ;
-		}
+		n++;
+		i++;
 	}
+}
+
+template <typename T>
+void printChar(T value)
+{
+	if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
+	{
+		if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
+			std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
+		else
+			std::cout << "char: Non displayable" << std::endl;
+	}
+	else
+		std::cout << "char: impossible" << std::endl;
+}
+
+void printFloat(std::string str, int n)
+{
+	errno = 0;
+	char *end;
+	float value = strtof(str.c_str(), &end);
+	if (errno == ERANGE)
+	{
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "char: impossible" << std::endl;
+	}
+	else
+	{
+		std::cout << std::fixed << std::setprecision(n) << "float: " << value << "f" << std::endl;
+		printChar(value);
+	}
+}
+
+void printInt(std::string str)
+{
+	char *end;
+	long value_int = strtol(str.c_str(), &end, 10);
+	if (value_int > std::numeric_limits<int>::max() || value_int < std::numeric_limits<int>::min())
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << value_int << std::endl;
+}
+
+void printDouble(std::string str, int n)
+{
+	errno = 0;
+	char *end;
+	double value_double = strtod(str.c_str(), &end);
+	if (errno == ERANGE)
+		std::cout << "double: impossible" << std::endl;
+	else
+		std::cout << std::fixed << std::setprecision(n) << "double: " << value_double << std::endl;
 }
 
 void ScalarConverter::convert(const std::string &str)
 {
 	int isNegative = 0;
 	int type = detectType(str, isNegative);
-
 	if (type == INVALID)
 	{
 		std::cout << "Invalid input, it cannot be detected" << std::endl;
@@ -148,89 +180,17 @@ void ScalarConverter::convert(const std::string &str)
 	{
 		int n = 0;
 		countFloat(str, n);
-		errno = 0;
-		char *end;
-		float value = strtof(str.c_str(), &end);
-		if (errno == ERANGE)
-		{
-			std::cout << "float: impossible" << std::endl;
-			std::cout << "char: impossible" << std::endl;
-		}
-		else
-		{
-			std::cout << std::fixed << std::setprecision(n) << "float: " << value << "f" << std::endl;
-
-			if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
-			{
-				if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
-					std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
-				else
-					std::cout << "char: Non displayable" << std::endl;
-			}
-			else
-				std::cout << "char: impossible" << std::endl;
-		}
-		errno = 0;
-		end = NULL;
-		double value_double = strtod(str.c_str(), &end);
-		if (errno == ERANGE)
-			std::cout << "double: impossible" << std::endl;
-		else
-		{
-			std::cout << std::fixed << std::setprecision(n) << "double: " << value_double << std::endl;
-		}
-		errno = 0;
-		end = NULL;
-		long value_int = strtol(str.c_str(), &end, 10);
-		if (value_int > std::numeric_limits<int>::max() || value_int < std::numeric_limits<int>::min())
-			std::cout << "int: impossible" << std::endl;
-		else
-			std::cout << "int: " << value_int << std::endl;
+		printFloat(str, n);
+		printDouble(str, n);
+		printInt(str);
 	}
 	if (type == DOUBLE)
 	{
 		int n = 0;
 		countFloat(str, n);
-		errno = 0;
-		char *end;
-		double value = strtod(str.c_str(), &end);
-		if (errno == ERANGE)
-		{
-			std::cout << "double: impossible" << std::endl;
-			std::cout << "char: impossible" << std::endl;
-			std::cout << "float: impossible" << std::endl;
-			std::cout << "int: impossible" << std::endl;
-		}
-		else
-		{
-			std::cout << std::fixed << std::setprecision(n) << "double: " << value << std::endl;
-
-			if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
-			{
-				if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
-					std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
-				else
-					std::cout << "char: Non displayable" << std::endl;
-			}
-			else
-				std::cout << "char: impossible" << std::endl;
-		}
-		errno = 0;
-		end = NULL;
-		float value_float = strtof(str.c_str(), &end);
-		if (errno == ERANGE)
-			std::cout << "float: impossible" << std::endl;
-		else
-		{
-			std::cout << std::fixed << std::setprecision(n) << "float: " << value_float << "f" <<std::endl;
-		}
-		errno = 0;
-		end = NULL;
-		long value_int = strtol(str.c_str(), &end, 10);
-		if (value_int > std::numeric_limits<int>::max() || value_int < std::numeric_limits<int>::min())
-			std::cout << "int: impossible" << std::endl;
-		else
-			std::cout << "int: " << value_int << std::endl;
+		printDouble(str,n);
+		printFloat(str, n);
+		printInt(str);
 	}
 	if (type == CHAR)
 	{
@@ -242,41 +202,9 @@ void ScalarConverter::convert(const std::string &str)
 	}
 	if (type == INT)
 	{
-		char *end;
-		long value = strtol(str.c_str(), &end, 10);
-		if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
-		{
-			std::cout << "int: impossible" << std::endl;
-			std::cout << "char: impossible" << std::endl;
-		}
-		else
-		{
-			int num = static_cast<int>(value);
-			std::cout << "int: " << num << std::endl;
-			if (num >= 0 && num <= 127)
-			{
-				if (num > 31 && num < 127)
-					std::cout << "char: '" << static_cast<char>(num) << "'" << std::endl;
-				else
-					std::cout << "char: Non displayable" << std::endl;
-			}
-			else
-				std::cout << "char: impossible" << std::endl;
-		}
-		errno = 0;
-		end = NULL;
-		float value_float = strtof(str.c_str(), &end);
-		if (errno == ERANGE)
-			std::cout << "float: impossible" << std::endl;
-		else
-			std::cout << "float: " << value_float << ".0f" << std::endl;
-		errno = 0;
-		end = NULL;
-		double value_double = strtod(str.c_str(), &end);
-		if (errno == ERANGE)
-			std::cout << "double: impossible" << std::endl;
-		else
-			std::cout << "double: " << value_double << ".0" << std::endl;
+		printInt(str);
+		printFloat(str, 1);
+		printDouble(str, 1);
 	}
 	if (type == F_PSEUDO)
 	{
