@@ -9,7 +9,6 @@
 #include <sstream>
 #include <cerrno>
 
-
 ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter& other)
@@ -79,13 +78,23 @@ int isAllDigit(std::string str)
 	return (1);
 }
 
+// int isChar(std::string str)
+// {
+// 	char *end;
+// 	long num = strtol(str.c_str(), &end, 10);
+// 	std::cout << num << std::endl;
+
+// 	if (num >= 0 && num <= 9)
+// 		return (0);
+// 	return (1);
+// }
+
 int detectType(const std::string &str, int &isNegative)
 {
 	if (str[0] == '-')
 		isNegative = 1;
-	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
-		return (CHAR);
-	else if (str == "nan" || str == "+inf" || str == "-inf")
+
+	if (str == "nan" || str == "+inf" || str == "-inf")
 		return (D_PSEUDO);
 	else if (str == "nanf" || str == "+inff" || str == "-inff")
 		return (F_PSEUDO);
@@ -95,6 +104,9 @@ int detectType(const std::string &str, int &isNegative)
 		return (DOUBLE);
 	else if (isInt(str))
 		return (INT);
+	else if (str.length() == 1)
+	// if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
+		return (CHAR);
 	else
 		return (INVALID);
 }
@@ -126,8 +138,7 @@ void ScalarConverter::convert(const std::string &str)
 {
 	int isNegative = 0;
 	int type = detectType(str, isNegative);
-	int n = 0;
-	countFloat(str, n);
+
 	if (type == INVALID)
 	{
 		std::cout << "Invalid input, it cannot be detected" << std::endl;
@@ -135,6 +146,8 @@ void ScalarConverter::convert(const std::string &str)
 	}
 	if (type == FLOAT)
 	{
+		int n = 0;
+		countFloat(str, n);
 		errno = 0;
 		char *end;
 		float value = strtof(str.c_str(), &end);
@@ -176,6 +189,8 @@ void ScalarConverter::convert(const std::string &str)
 	}
 	if (type == DOUBLE)
 	{
+		int n = 0;
+		countFloat(str, n);
 		errno = 0;
 		char *end;
 		double value = strtod(str.c_str(), &end);
@@ -217,16 +232,14 @@ void ScalarConverter::convert(const std::string &str)
 		else
 			std::cout << "int: " << value_int << std::endl;
 	}
-	// if (type == CHAR)
-	// {
-	// 	char c = str[1];
-	// 	std::cout << "char: " << str << std::endl;
-	// 	std::cout << "int: " << static_cast<int>(c)<< std::endl;
-	// 	std::cout << std::fixed << std::setprecision(1);
-	// 	std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
-	// 	std::cout << std::fixed << std::setprecision(1);
-	// 	std::cout << "double: " << static_cast<double>(c) << std::endl;
-	// }
+	if (type == CHAR)
+	{
+		char c = static_cast<char>(str[0]);
+		std::cout << "char: '" << c << "'" << std::endl;
+		std::cout << "int: " << static_cast<int>(c)<< std::endl;
+		std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
+	}
 	if (type == INT)
 	{
 		char *end;
@@ -240,8 +253,6 @@ void ScalarConverter::convert(const std::string &str)
 		{
 			int num = static_cast<int>(value);
 			std::cout << "int: " << num << std::endl;
-			std::cout << "double: " << num << ".0" << std::endl;
-			std::cout << "float: " << num << ".0f" << std::endl;
 			if (num >= 0 && num <= 127)
 			{
 				if (num > 31 && num < 127)
@@ -252,6 +263,20 @@ void ScalarConverter::convert(const std::string &str)
 			else
 				std::cout << "char: impossible" << std::endl;
 		}
+		errno = 0;
+		end = NULL;
+		float value_float = strtof(str.c_str(), &end);
+		if (errno == ERANGE)
+			std::cout << "float: impossible" << std::endl;
+		else
+			std::cout << "float: " << value_float << ".0f" << std::endl;
+		errno = 0;
+		end = NULL;
+		double value_double = strtod(str.c_str(), &end);
+		if (errno == ERANGE)
+			std::cout << "double: impossible" << std::endl;
+		else
+			std::cout << "double: " << value_double << ".0" << std::endl;
 	}
 	if (type == F_PSEUDO)
 	{
