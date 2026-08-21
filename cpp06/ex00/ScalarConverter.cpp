@@ -95,8 +95,12 @@ void ScalarConverter::convert(const std::string &str)
 		}
 		else
 		{
-			std::cout << std::fixed << std::setprecision(1);
-			std::cout << "float: " << value << "f" << std::endl;
+			// std::cout << std::fixed << std::setprecision(7);
+			std::cout << "float: " << value;
+			if (value == static_cast<int>(value))
+				std::cout << ".0";
+			std::cout << "f" << std::endl;
+
 			if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
 			{
 				if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
@@ -114,8 +118,10 @@ void ScalarConverter::convert(const std::string &str)
 			std::cout << "double: impossible" << std::endl;
 		else
 		{
-			std::cout << std::fixed << std::setprecision(1);
-			std::cout << "double: " << value_double << std::endl;
+			// std::cout << std::fixed << std::setprecision(1);
+			std::cout << "double: " << value_double;
+			if (value_double == static_cast<int>(value_double))
+				std::cout << ".0" << std::endl;
 		}
 		errno = 0;
 		end = NULL;
@@ -126,26 +132,13 @@ void ScalarConverter::convert(const std::string &str)
 		// 	std::cout << "int: impossible" << std::endl;
 		else
 			std::cout << "int: " << value_int << std::endl;
-
-		// std::stringstream ss;
-		// int value;
-		// ss << str;
-		// ss >> value;
-		// std::cout << value << std::endl;
-		// float a = stoll(str);
-		// std::cout << std::numeric_limits<float>::min() << std::endl;
-		// std::cout << (stoll(str))  << std::endl;
-		// if (static_cast<float>(stoll(str))  < std::numeric_limits<float>::min())
-		// 	std::cout << "impossible" << std::endl;
-		// std::cout << "char: '" << static_cast<char>(stoi(str)) << "'" << std::endl;
-		// std::cout << "int: " << static_cast<int>(stoi(str)) << std::endl;
-		// std::cout << std::fixed << std::setprecision(1);
-		// std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
-		// std::cout << std::fixed << std::setprecision(1);
-		// std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
 	}
-	// if (type == DOUBLE)
-	// {
+	if (type == DOUBLE)
+	{
+		// errno = 0;
+		// char *end;
+		// double value = strtod(str.c_str(), &end);
+
 	// 	if (isNegative)
 	// 		std::cout << "char: impossible" << std::endl;
 	// 	else
@@ -155,7 +148,7 @@ void ScalarConverter::convert(const std::string &str)
 	// 	std::cout << "float: " << static_cast<float>(stof(str)) << "f" << std::endl;
 	// 	std::cout << std::fixed << std::setprecision(1);
 	// 	std::cout << "double: " << static_cast<double>(stod(str)) << std::endl;
-	// }
+	}
 	// if (type == CHAR)
 	// {
 	// 	char c = str[1];
@@ -193,19 +186,4 @@ void ScalarConverter::convert(const std::string &str)
 		std::cout << "float: " << str << "f" << std::endl;
 		std::cout << "double: " << str << std::endl;
 	}
-	// if (type == INF || type == INFF)
-	// {
-	// 	std::cout << "char: impossible" << std::endl;
-	// 	std::cout << "int: impossible" << std::endl;
-	// 	if (isNegative)
-	// 	{
-	// 		std::cout << "float: -inff" << std::endl;
-	// 		std::cout << "double: -inf" << std::endl;
-	// 	}
-	// 	else
-	// 	{
-	// 		std::cout << "float: inff" << std::endl;
-	// 		std::cout << "double: inf" << std::endl;
-	// 	}
-	// }
 }
