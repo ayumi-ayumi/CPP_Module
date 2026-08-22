@@ -12,7 +12,10 @@ SRCS_FILES = main.cpp \
 		Base.cpp \
 		A.cpp \
 		B.cpp \
-		C.cpp
+		C.cpp \
+		generate.cpp \
+		identify_ptr.cpp \
+		identify_ref.cpp 
 
 SRCS	= $(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS_FILES:.cpp=.o))

@@ -2,10 +2,14 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include <ctime>
+#include <cstdlib>
 
 int main()
 {
-	A ayumi;
-	B baby;
-	C conny;
+	std::srand(std::time(NULL));
+	Base* const ayumi = generate();
+	identify(ayumi);
+	identify(*ayumi);
+	delete ayumi;
 }
