@@ -1,12 +1,9 @@
-
 #include "ScalarConverter.hpp"
 #include <iostream>
-#include <string>
 #include <cctype>
 #include <iomanip>
 #include <limits>
 #include <cstdlib>
-#include <sstream>
 #include <cerrno>
 
 ScalarConverter::ScalarConverter() {}
@@ -31,8 +28,6 @@ enum Type{
 	DOUBLE,
 	D_PSEUDO,
 	F_PSEUDO,
-	INF,
-	INFF,
 	INVALID
 };
 
@@ -51,38 +46,32 @@ bool isInt(const std::string &str)
 	return (true);
 }
 
-int isAllDigit(std::string str)
+bool isAllDigit(std::string str)
 {
 	size_t i = 0;
-	int dot_flag = 0;
+	int point_flag = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
 	while (i < str.length())
 	{
 		if (str[i] == '.')
 		{
-			dot_flag++;
+			point_flag++;
 			i++;
-			if (dot_flag > 1)
-				return (0);
+			if (point_flag > 1)
+				return (false);
 		}
-		if (i == str.length() - 1)
-		{
-			if (str[i] == 'f')
-				return (1);
-		}
+		if (i == str.length() - 1 && str[i] == 'f')
+				return (true);
 		if (!isdigit(str[i]))
-			return (0);
+			return (false);
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
-int detectType(const std::string &str, int &isNegative)
+int detectType(const std::string &str)
 {
-	if (str[0] == '-')
-		isNegative = 1;
-
 	if (str == "nan" || str == "+inf" || str == "-inf")
 		return (D_PSEUDO);
 	else if (str == "nanf" || str == "+inff" || str == "-inff")
@@ -99,8 +88,9 @@ int detectType(const std::string &str, int &isNegative)
 		return (INVALID);
 }
 
-void countFloat(std::string str, int &n)
+int countFractionalBits(std::string str)
 {
+	int n = 0;
 	size_t i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i++;
@@ -113,36 +103,26 @@ void countFloat(std::string str, int &n)
 		n++;
 		i++;
 	}
+	return (n);
 }
 
-template <typename T>
-void printChar(T value)
+void printChar(std::string str)
 {
-	if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
-	{
-		if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
-			std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
-		else
-			std::cout << "char: Non displayable" << std::endl;
-	}
-	else
-		std::cout << "char: impossible" << std::endl;
-}
-
-void printFloat(std::string str, int n)
-{
-	errno = 0;
 	char *end;
-	float value = strtof(str.c_str(), &end);
-	if (errno == ERANGE)
-	{
-		std::cout << "float: impossible" << std::endl;
+	long value = strtol(str.c_str(), &end, 10);
+	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
 		std::cout << "char: impossible" << std::endl;
-	}
 	else
 	{
-		std::cout << std::fixed << std::setprecision(n) << "float: " << value << "f" << std::endl;
-		printChar(value);
+		if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
+		{
+			if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
+				std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
+			else
+				std::cout << "char: Non displayable" << std::endl;
+		}
+		else
+			std::cout << "char: impossible" << std::endl;
 	}
 }
 
@@ -156,7 +136,20 @@ void printInt(std::string str)
 		std::cout << "int: " << value_int << std::endl;
 }
 
-void printDouble(std::string str, int n)
+void printFloat(std::string str, int fractionalBits)
+{
+	if (fractionalBits == 0)
+		fractionalBits = 1;
+	errno = 0;
+	char *end;
+	float value = strtof(str.c_str(), &end);
+	if (errno == ERANGE)
+		std::cout << "float: impossible" << std::endl;
+	else
+		std::cout << std::fixed << std::setprecision(fractionalBits) << "float: " << value << "f" << std::endl;
+}
+
+void printDouble(std::string str, int fractionalBits)
 {
 	errno = 0;
 	char *end;
@@ -164,33 +157,29 @@ void printDouble(std::string str, int n)
 	if (errno == ERANGE)
 		std::cout << "double: impossible" << std::endl;
 	else
-		std::cout << std::fixed << std::setprecision(n) << "double: " << value_double << std::endl;
+		std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value_double << std::endl;
 }
 
 void ScalarConverter::convert(const std::string &str)
 {
-	int isNegative = 0;
-	int type = detectType(str, isNegative);
-	if (type == INVALID)
+	if (str == "")
 	{
-		std::cout << "Invalid input, it cannot be detected" << std::endl;
+		std::cout << "Invalid input" << std::endl;
 		return;
 	}
-	if (type == FLOAT)
+	int type = detectType(str);
+	int fractionalBits = countFractionalBits(str);
+	if (type == INVALID)
 	{
-		int n = 0;
-		countFloat(str, n);
-		printFloat(str, n);
-		printDouble(str, n);
-		printInt(str);
+		std::cout << "Invalid input" << std::endl;
+		return;
 	}
-	if (type == DOUBLE)
+	if (type == FLOAT || type == DOUBLE || type == INT)
 	{
-		int n = 0;
-		countFloat(str, n);
-		printDouble(str,n);
-		printFloat(str, n);
+		printChar(str);
 		printInt(str);
+		printFloat(str, fractionalBits);
+		printDouble(str, fractionalBits);
 	}
 	if (type == CHAR)
 	{
@@ -199,12 +188,6 @@ void ScalarConverter::convert(const std::string &str)
 		std::cout << "int: " << static_cast<int>(c)<< std::endl;
 		std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
 		std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
-	}
-	if (type == INT)
-	{
-		printInt(str);
-		printFloat(str, 1);
-		printDouble(str, 1);
 	}
 	if (type == F_PSEUDO)
 	{
