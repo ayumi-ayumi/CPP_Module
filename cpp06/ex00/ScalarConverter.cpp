@@ -178,7 +178,6 @@ void ScalarConverter::convert(const std::string &str)
 		return;
 	}
 	int type = detectType(str);
-	std::cout << type << std::endl;
 	int fractionalBits = countFractionalBits(str);
 	if (type == INVALID)
 	{
