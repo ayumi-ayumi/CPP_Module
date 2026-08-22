@@ -34,8 +34,12 @@ enum Type{
 bool isInt(const std::string &str)
 {
 	int i = 0;
+	bool sign = false;
 	if (str[0] == '-' || str[0] == '+')
+	{
+		sign = true;
 		i++;
+	}
 	while (str[i])
 	{
 		if (isdigit(str[i]))
@@ -43,6 +47,8 @@ bool isInt(const std::string &str)
 		else
 			return (false);
 	}
+	if (sign && i == 1)
+		return (false);
 	return (true);
 }
 
@@ -51,7 +57,11 @@ bool isAllDigit(std::string str)
 	size_t i = 0;
 	int point_flag = 0;
 	if (str[0] == '-' || str[0] == '+')
+	{
+		if (str[1] == 'f')
+			return (false);
 		i++;
+	}
 	while (i < str.length())
 	{
 		if (str[i] == '.')
@@ -168,6 +178,7 @@ void ScalarConverter::convert(const std::string &str)
 		return;
 	}
 	int type = detectType(str);
+	std::cout << type << std::endl;
 	int fractionalBits = countFractionalBits(str);
 	if (type == INVALID)
 	{
