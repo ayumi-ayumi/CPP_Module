@@ -1,11 +1,12 @@
 #ifndef _SERIALIZER_H_
 #define _SERIALIZER_H_
 #include <string>
+#include <stdint.h>
 
 struct Data
 {
-	std::string	name;
 	int			id;
+	std::string	name;
 	int			score;
 	bool		isSelected;
 };
