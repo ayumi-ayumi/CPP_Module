@@ -6,15 +6,36 @@ template <typename T>
 void multiDouble(T &num)
 {
 	num = num * 2;
+	std::cout << num << std::endl;
 }
 
-template <typename T1, typename F>
-void iter(T1 *arr, const int len, F func)
+template <typename T>
+void printNum(const T &num)
 {
-	for (int i = 0; i < len; i++)
+	std::cout << num << std::endl;
+}
+
+template <typename T>
+void iter(T *arr, const size_t len, void(*func)(T&))
+{
+	if (!arr || len == 0 || !func)
+		return ;
+	for (size_t i = 0; i < len; i++)
 	{
+		std::cout << "arr[" << i << "] -> ";
 		func(arr[i]);
-		std::cout << "arr[" << i << "] -> " << arr[i] << std::endl;
+	}
+}
+
+template <typename T>
+void iter(T *arr, const size_t len, void(*func)(const T&))
+{
+	if (!arr || len == 0 || !func)
+		return ;
+	for (size_t i = 0; i < len; i++)
+	{
+		std::cout << "arr[" << i << "] -> ";
+		func(arr[i]);
 	}
 }
 
