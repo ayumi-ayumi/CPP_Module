@@ -1,30 +1,39 @@
 template <typename T>
-Array<T>::Array() {};
+Array<T>::Array(): ptr(NULL), num(0) {};
 
 template <typename T>
-Array<T>::Array(unsigned int n): num(n)
+Array<T>::Array(unsigned int n): ptr(new T[n]()), num(n) {} // new int() means initialize as 0(default)
+
+// Copy constructor
+template <typename T>
+Array<T>::Array(const Array& other): ptr(new T[other.num]()), num(other.num)
 {
-	ptr = new T[n];
+	for (unsigned int i = 0; i < num; i++)
+		ptr[i] = other.ptr[i];
 }
 
 template <typename T>
-Array<T>::Array(const Array& other)
+Array<T>& Array<T>::operator=(const Array& rhs)
 {
-	(void)other;
+	if (this != &rhs)
+	{
+		delete[] ptr;
+		num = rhs.num;
+		ptr = new T[num]();
+		for (unsigned int i = 0; i < num; i++)
+			ptr[i] = rhs.ptr[i];
+	}
+	return (*this);
 }
 
 template <typename T>
-T& Array<T>::operator[](int i)
+T& Array<T>::operator[](unsigned int i)
 {
-	if (i > num || i < num)
+	if (i >= num)
 		throw (OutOfBounds());
 	else
 		return ptr[i];
 }
-
-
-// template <typename T>
-// Array& Array<T>::operator=(const Array& other){}
 
 template <typename T>
 Array<T>::~Array()
@@ -33,12 +42,9 @@ Array<T>::~Array()
 }
 
 template <typename T>
-int Array<T>::size()
+unsigned int Array<T>::size() const
 {
-	int i = 0;
-	while (ptr[i])
-		i++;
-	return (i);
+	return (num);
 }
 
 template <typename T>

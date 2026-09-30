@@ -9,19 +9,16 @@ class Array
 		Array();
 		Array(unsigned int n);
 		Array(const Array& other);
-		// Array& operator=(const Array& other);
-		T& operator[](int i);
+		Array& operator=(const Array& rhs);
 		~Array();
 
-		class OutOfBounds : public std::exception
-		{
-			const char*		what() const throw();
-		};
+		T& operator[](unsigned int i);
+		unsigned int size() const;
+		class OutOfBounds : public std::exception { const char* what() const throw();};
 
-
-		int size();
+	private:
 		T* ptr;
-		int num;
+		unsigned int num;
 };
 
 #include "Array.tpp"
