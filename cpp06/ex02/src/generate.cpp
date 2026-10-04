@@ -4,7 +4,7 @@
 #include "C.hpp"
 #include <cstdlib>
 
-Base * generate(void)
+Base* generate(void)
 {
 	int idx = rand() % 3;
 	if (idx == 0)
