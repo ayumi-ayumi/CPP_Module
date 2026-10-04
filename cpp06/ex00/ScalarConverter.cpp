@@ -47,7 +47,7 @@ bool isInt(const std::string &str)
 		else
 			return (false);
 	}
-	if (sign && i == 1)
+	if (sign && i == 1) // "-"
 		return (false);
 	return (true);
 }
@@ -58,7 +58,7 @@ bool isAllDigit(std::string str)
 	int point_flag = 0;
 	if (str[0] == '-' || str[0] == '+')
 	{
-		if (str[1] == 'f')
+		if (str[1] == 'f') // Check if it is not "-f"
 			return (false);
 		i++;
 	}
@@ -68,7 +68,7 @@ bool isAllDigit(std::string str)
 		{
 			point_flag++;
 			i++;
-			if (point_flag > 1)
+			if (point_flag > 1) // Check if it is not "4..5f"
 				return (false);
 		}
 		if (i == str.length() - 1 && str[i] == 'f')
@@ -92,7 +92,7 @@ int detectType(const std::string &str)
 		return (DOUBLE);
 	else if (isInt(str))
 		return (INT);
-	else if (str.length() == 1)
+	else if (str.length() == 1 || (str.length() == 3 && str[0] == '\'' && str[2] == '\''))
 		return (CHAR);
 	else
 		return (INVALID);
@@ -138,9 +138,10 @@ void printChar(std::string str)
 
 void printInt(std::string str)
 {
+	errno = 0;
 	char *end;
 	long value_int = strtol(str.c_str(), &end, 10);
-	if (value_int > std::numeric_limits<int>::max() || value_int < std::numeric_limits<int>::min())
+	if (errno == ERANGE || value_int > std::numeric_limits<int>::max() || value_int < std::numeric_limits<int>::min())
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << value_int << std::endl;
@@ -159,7 +160,7 @@ void printFloat(std::string str, int fractionalBits)
 		std::cout << std::fixed << std::setprecision(fractionalBits) << "float: " << value << "f" << std::endl;
 }
 
-void printDouble(std::string str, int fractionalBits)
+void printDouble(std::string str, int fractionalBits, int type)
 {
 	errno = 0;
 	char *end;
@@ -167,7 +168,12 @@ void printDouble(std::string str, int fractionalBits)
 	if (errno == ERANGE)
 		std::cout << "double: impossible" << std::endl;
 	else
-		std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value_double << std::endl;
+	{
+		if (type == INT)
+			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value_double << ".0" << std::endl;
+		else
+			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value_double << std::endl;
+	}
 }
 
 void ScalarConverter::convert(const std::string &str)
@@ -189,11 +195,15 @@ void ScalarConverter::convert(const std::string &str)
 		printChar(str);
 		printInt(str);
 		printFloat(str, fractionalBits);
-		printDouble(str, fractionalBits);
+		printDouble(str, fractionalBits, type);
 	}
 	if (type == CHAR)
 	{
-		char c = static_cast<char>(str[0]);
+		char c;
+		if (str.length() == 3)
+			c = static_cast<char>(str[1]);
+		else
+			c = static_cast<char>(str[0]);
 		std::cout << "char: '" << c << "'" << std::endl;
 		std::cout << "int: " << static_cast<int>(c)<< std::endl;
 		std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
