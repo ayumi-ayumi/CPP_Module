@@ -8,9 +8,9 @@ Base* generate(void)
 {
 	int idx = rand() % 3;
 	if (idx == 0)
-		return new A();
+		return (new A());
 	else if (idx == 1)
-		return new B();
+		return (new B());
 	else
-		return new C();
+		return (new C());
 }
