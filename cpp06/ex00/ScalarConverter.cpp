@@ -31,7 +31,7 @@ enum Type{
 	INVALID
 };
 
-bool isInt(const std::string &str)
+bool isInt(const string &str)
 {
 	int i = 0;
 	bool sign = false;
@@ -47,18 +47,20 @@ bool isInt(const std::string &str)
 		else
 			return (false);
 	}
-	if (sign && i == 1) // "-"
+	if (sign && i == 1) // "-" or "+"
 		return (false);
 	return (true);
 }
 
-bool isAllDigit(std::string str)
+bool isAllDigit(string str)
 {
 	size_t i = 0;
-	int point_flag = 0;
+	int decimal_point_flag = 0;
+	if (str[0] == '.')
+		return (false);
 	if (str[0] == '-' || str[0] == '+')
 	{
-		if (str[1] == 'f') // Check if it is not "-f"
+		if (str[1] == '.' || str[1] == 'f') // Check if it is not "-f" or "+f"
 			return (false);
 		i++;
 	}
@@ -66,9 +68,9 @@ bool isAllDigit(std::string str)
 	{
 		if (str[i] == '.')
 		{
-			point_flag++;
+			decimal_point_flag++;
 			i++;
-			if (point_flag > 1) // Check if it is not "4..5f"
+			if (decimal_point_flag > 1) // Check if it is not "4..5f"
 				return (false);
 		}
 		if (i == str.length() - 1 && str[i] == 'f')
@@ -80,7 +82,7 @@ bool isAllDigit(std::string str)
 	return (true);
 }
 
-int detectType(const std::string &str)
+int detectType(const string &str)
 {
 	if (str == "nan" || str == "+inf" || str == "-inf")
 		return (D_PSEUDO);
@@ -88,7 +90,7 @@ int detectType(const std::string &str)
 		return (F_PSEUDO);
 	else if (str[str.length() - 1] == 'f' && isAllDigit(str))
 		return (FLOAT);
-	else if (str.find('.') != std::string::npos && isAllDigit(str))
+	else if (str.find('.') != string::npos && isAllDigit(str))
 		return (DOUBLE);
 	else if (isInt(str))
 		return (INT);
@@ -98,7 +100,7 @@ int detectType(const std::string &str)
 		return (INVALID);
 }
 
-int countFractionalBits(std::string str)
+int countFractionalBits(string str) // count
 {
 	int n = 0;
 	size_t i = 0;
@@ -116,17 +118,18 @@ int countFractionalBits(std::string str)
 	return (n);
 }
 
-void printChar(std::string str)
+void printChar(string str)
 {
+	errno = 0;
 	char *end;
 	long value = strtol(str.c_str(), &end, 10);
-	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+	if (errno == ERANGE || value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
 		std::cout << "char: impossible" << std::endl;
 	else
 	{
 		if (static_cast<int>(value) >= 0 && static_cast<int>(value) <= 127)
 		{
-			if (static_cast<int>(value) > 31 && static_cast<int>(value) < 127)
+			if (isprint(static_cast<int>(value)))
 				std::cout << "char: '" << static_cast<char>(value) << "'" << std::endl;
 			else
 				std::cout << "char: Non displayable" << std::endl;
@@ -136,18 +139,18 @@ void printChar(std::string str)
 	}
 }
 
-void printInt(std::string str)
+void printInt(string str)
 {
 	errno = 0;
 	char *end;
-	long value_int = strtol(str.c_str(), &end, 10);
-	if (errno == ERANGE || value_int > std::numeric_limits<int>::max() || value_int < std::numeric_limits<int>::min())
+	long value = strtol(str.c_str(), &end, 10);
+	if (errno == ERANGE || value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
 		std::cout << "int: impossible" << std::endl;
 	else
-		std::cout << "int: " << value_int << std::endl;
+		std::cout << "int: " << value << std::endl;
 }
 
-void printFloat(std::string str, int fractionalBits)
+void printFloat(string str, int fractionalBits)
 {
 	if (fractionalBits == 0)
 		fractionalBits = 1;
@@ -160,36 +163,33 @@ void printFloat(std::string str, int fractionalBits)
 		std::cout << std::fixed << std::setprecision(fractionalBits) << "float: " << value << "f" << std::endl;
 }
 
-void printDouble(std::string str, int fractionalBits, int type)
+void printDouble(string str, int fractionalBits, int type)
 {
 	errno = 0;
 	char *end;
-	double value_double = strtod(str.c_str(), &end);
+	double value = strtod(str.c_str(), &end);
 	if (errno == ERANGE)
 		std::cout << "double: impossible" << std::endl;
 	else
 	{
 		if (type == INT)
-			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value_double << ".0" << std::endl;
+			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value << ".0" << std::endl;
 		else
-			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value_double << std::endl;
+			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value << std::endl;
 	}
 }
 
-void ScalarConverter::convert(const std::string &str)
+void ScalarConverter::convert(const string &str)
 {
-	if (str == "")
-	{
-		std::cout << "Invalid input" << std::endl;
-		return;
-	}
 	int type = detectType(str);
 	int fractionalBits = countFractionalBits(str);
-	if (type == INVALID)
+
+	if (str == "" || type == INVALID)
 	{
 		std::cout << "Invalid input" << std::endl;
 		return;
 	}
+
 	if (type == FLOAT || type == DOUBLE || type == INT)
 	{
 		printChar(str);
@@ -197,6 +197,7 @@ void ScalarConverter::convert(const std::string &str)
 		printFloat(str, fractionalBits);
 		printDouble(str, fractionalBits, type);
 	}
+
 	if (type == CHAR)
 	{
 		char c;
@@ -209,14 +210,16 @@ void ScalarConverter::convert(const std::string &str)
 		std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
 		std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
 	}
+
 	if (type == F_PSEUDO)
 	{
-		std::string sub_str = str.substr(0, str.length() - 1);
+		string sub_str = str.substr(0, str.length() - 1);
 		std::cout << "char: impossible" << std::endl;
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << sub_str<< "f" << std::endl;
 		std::cout << "double: " << sub_str << std::endl;
 	}
+
 	if (type == D_PSEUDO)
 	{
 		std::cout << "char: impossible" << std::endl;

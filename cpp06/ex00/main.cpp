@@ -10,10 +10,12 @@ int main(int argc, char *argv[])
 	}
 	ScalarConverter::convert(argv[1]);
 }
+
 /*
 'a'
 '0'
 1f
+.f
 2147483647
 -2147483648
 */
