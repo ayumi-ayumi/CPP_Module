@@ -172,7 +172,7 @@ void printDouble(string str, int fractionalDigits, int type)
 		std::cout << "double: impossible" << std::endl;
 	else
 	{
-		if (type == INT)
+		if (type == INT || fractionalDigits == 0)
 			std::cout << std::fixed << std::setprecision(fractionalDigits) << "double: " << value << ".0" << std::endl;
 		else
 			std::cout << std::fixed << std::setprecision(fractionalDigits) << "double: " << value << std::endl;
