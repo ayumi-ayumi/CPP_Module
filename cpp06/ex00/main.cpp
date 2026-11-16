@@ -16,6 +16,28 @@ int main(int argc, char *argv[])
 '0'
 1f
 .f
+
 2147483647
+char: impossible
+int: 2147483647
+float: 2147483648.0f
+double: 2147483647.0
+
 -2147483648
+char: impossible
+int: -2147483648
+float: -2147483648.0f
+double: -2147483648.0
+
+2147483648
+char: impossible
+int: impossible
+float: 2147483648.0f
+double: 2147483648.0
+
+-2147483649
+char: impossible
+int: impossible
+float: -2147483648.0f
+double: -2147483649.0
 */
