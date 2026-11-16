@@ -100,7 +100,7 @@ int detectType(const string &str)
 		return (INVALID);
 }
 
-int countFractionalBits(string str) // count
+int countFractionalDigits(string str)
 {
 	int n = 0;
 	size_t i = 0;
@@ -150,20 +150,20 @@ void printInt(string str)
 		std::cout << "int: " << value << std::endl;
 }
 
-void printFloat(string str, int fractionalBits)
+void printFloat(string str, int fractionalDigits)
 {
-	if (fractionalBits == 0)
-		fractionalBits = 1;
+	if (fractionalDigits == 0)
+		fractionalDigits = 1;
 	errno = 0;
 	char *end;
 	float value = strtof(str.c_str(), &end);
 	if (errno == ERANGE)
 		std::cout << "float: impossible" << std::endl;
 	else
-		std::cout << std::fixed << std::setprecision(fractionalBits) << "float: " << value << "f" << std::endl;
+		std::cout << std::fixed << std::setprecision(fractionalDigits) << "float: " << value << "f" << std::endl;
 }
 
-void printDouble(string str, int fractionalBits, int type)
+void printDouble(string str, int fractionalDigits, int type)
 {
 	errno = 0;
 	char *end;
@@ -173,16 +173,16 @@ void printDouble(string str, int fractionalBits, int type)
 	else
 	{
 		if (type == INT)
-			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value << ".0" << std::endl;
+			std::cout << std::fixed << std::setprecision(fractionalDigits) << "double: " << value << ".0" << std::endl;
 		else
-			std::cout << std::fixed << std::setprecision(fractionalBits) << "double: " << value << std::endl;
+			std::cout << std::fixed << std::setprecision(fractionalDigits) << "double: " << value << std::endl;
 	}
 }
 
 void ScalarConverter::convert(const string &str)
 {
 	int type = detectType(str);
-	int fractionalBits = countFractionalBits(str);
+	int fractionalDigits = countFractionalDigits(str);
 
 	if (str == "" || type == INVALID)
 	{
@@ -194,8 +194,8 @@ void ScalarConverter::convert(const string &str)
 	{
 		printChar(str);
 		printInt(str);
-		printFloat(str, fractionalBits);
-		printDouble(str, fractionalBits, type);
+		printFloat(str, fractionalDigits);
+		printDouble(str, fractionalDigits, type);
 	}
 
 	if (type == CHAR)
