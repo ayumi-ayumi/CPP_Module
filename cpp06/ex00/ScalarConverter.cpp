@@ -69,9 +69,9 @@ bool isAllDigit(string str)
 		if (str[i] == '.')
 		{
 			decimal_point_flag++;
-			i++;
-			if (decimal_point_flag > 1) // Check if it is not "4..5f"
+			if (decimal_point_flag > 1 || str[i + 1] == 'f') // Check if it is not "4..5f" or "0.f"
 				return (false);
+			i++;
 		}
 		if (i == str.length() - 1 && str[i] == 'f')
 				return (true);

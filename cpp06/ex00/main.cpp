@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 '0'
 1f
 .f
+0.f
 
 2147483647
 char: impossible
