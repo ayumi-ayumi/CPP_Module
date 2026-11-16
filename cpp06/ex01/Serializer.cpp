@@ -15,14 +15,12 @@ Serializer& Serializer::operator=(const Serializer& other)
 
 Serializer::~Serializer() {}
 
-uintptr_t Serializer::serialize(Data* ptr)
+uintptr_t Serializer::serialize(Data* dataPtr)
 {
-	uintptr_t rtn_ptr = reinterpret_cast<uintptr_t>(ptr);
-	return (rtn_ptr);
+	return (reinterpret_cast<uintptr_t>(dataPtr));
 }
 
-Data* Serializer::deserialize(uintptr_t raw)
+Data* Serializer::deserialize(uintptr_t serializedAddress)
 {
-	Data *rtn_data = reinterpret_cast<Data *>(raw);
-	return (rtn_data);
+	return (reinterpret_cast<Data *>(serializedAddress));
 }

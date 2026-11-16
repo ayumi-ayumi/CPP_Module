@@ -3,11 +3,11 @@
 
 int main()
 {
-	Data ayumi = {1, "Ayumi", 40, true};
-	
-	uintptr_t raw = Serializer::serialize(&ayumi);
-	Data *deserialized = Serializer::deserialize(raw);
+	Data originalData = {1, "Ayumi", 40, true};
 
-	std::cout << "Original pointer: " << &ayumi << std::endl;
-	std::cout << "deserialized pointer: " << deserialized << std::endl;
+	uintptr_t serializedAddress = Serializer::serialize(&originalData);
+	Data *restoredData = Serializer::deserialize(serializedAddress);
+
+	std::cout << "Original pointer: " << &originalData << std::endl;
+	std::cout << "deserialized pointer: " << restoredData << std::endl;
 }

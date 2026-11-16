@@ -1,7 +1,7 @@
 #ifndef _SERIALIZER_H_
 #define _SERIALIZER_H_
 #include <string>
-#include <cstdint>
+#include <stdint.h>
 
 using std::string;
 
@@ -22,7 +22,7 @@ class Serializer
 		~Serializer();
 
 	public:
-		static uintptr_t serialize(Data* ptr);
+		static uintptr_t serialize(Data* dataPtr);
 		static Data* deserialize(uintptr_t raw);
 };
 
