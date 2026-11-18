@@ -4,8 +4,9 @@
 int main()
 {
 	Data originalData = {7, "Ayumi", 80, true};
+	Data *ptr = &originalData;
 
-	uintptr_t serializedAddress = Serializer::serialize(&originalData);
+	uintptr_t serializedAddress = Serializer::serialize(ptr);
 	Data *restoredData = Serializer::deserialize(serializedAddress);
 
 	std::cout << "Original pointer: " << &originalData << std::endl;
