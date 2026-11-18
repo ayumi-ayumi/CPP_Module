@@ -6,7 +6,7 @@
 
 Base* generate(void)
 {
-	int idx = rand() % 3;
+	int idx = std::rand() % 3;
 	if (idx == 0)
 		return (new A());
 	else if (idx == 1)

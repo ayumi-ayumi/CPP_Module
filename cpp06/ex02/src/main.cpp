@@ -8,6 +8,7 @@
 int main()
 {
 	std::srand(std::time(NULL));
+
 	Base* const ayumi = generate();
 	identify(ayumi);
 	identify(*ayumi);
