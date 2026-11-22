@@ -29,7 +29,7 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 template <typename T>
 T& Array<T>::operator[](unsigned int i)
 {
-	if (i >= num)
+	if (num == 0 || i >= num)
 		throw (OutOfBounds());
 	else
 		return ptr[i];
