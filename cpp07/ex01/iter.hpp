@@ -3,14 +3,14 @@
 #include <iostream>
 
 template <typename T, typename F>
-void iter(T *arr, const size_t len, F func)
+void iter(T *array, const size_t len, F function)
 {
-	if (!arr || len == 0 || !func)
+	if (!array || len == 0)
 		return ;
 	for (size_t i = 0; i < len; i++)
 	{
-		std::cout << "arr[" << i << "] -> ";
-		func(arr[i]);
+		std::cout << "array[" << i << "] -> ";
+		function(array[i]);
 	}
 }
 
