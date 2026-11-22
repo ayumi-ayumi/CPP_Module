@@ -1,6 +1,7 @@
 #include "whatever.hpp"
 #include <iostream>
-#include <string>
+
+using std::string;
 
 int main(void)
 {
@@ -29,8 +30,8 @@ int main(void)
 	}
 
 	{
-		std::string a = "chaine1";
-		std::string b = "chaine2";
+		string a = "chaine1";
+		string b = "chaine2";
 		std::cout << "\033[35m" << "Type: string" << "\033[0m" << std::endl;
 		std::cout << "Original: " << "a = " << a << ", b = " << b << std::endl;
 
