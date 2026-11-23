@@ -12,9 +12,9 @@ class Array
 		Array& operator=(const Array& rhs);
 		~Array();
 
-		T& operator[](unsigned int i);
+		T& operator[](unsigned int i) const;
 		unsigned int size() const;
-		
+
 		class OutOfBounds : public std::exception { const char* what() const throw();};
 
 	private:

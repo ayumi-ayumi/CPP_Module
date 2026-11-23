@@ -1,5 +1,5 @@
 template <typename T>
-Array<T>::Array(): ptr(NULL), num(0) {};
+Array<T>::Array(): ptr(NULL), num(0) {}
 
 template <typename T>
 Array<T>::Array(unsigned int n): ptr(new T[n]()), num(n) {} // new int() means initialize as 0(default)
@@ -17,17 +17,19 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 {
 	if (this != &rhs)
 	{
+		T *newPtr = new T[rhs.num]();
+		for (unsigned int i = 0; i < rhs.num; i++)
+			newPtr[i] = rhs.ptr[i];
+
 		delete[] ptr;
+		ptr = newPtr;
 		num = rhs.num;
-		ptr = new T[num]();
-		for (unsigned int i = 0; i < num; i++)
-			ptr[i] = rhs.ptr[i];
 	}
 	return (*this);
 }
 
 template <typename T>
-T& Array<T>::operator[](unsigned int i)
+T& Array<T>::operator[](unsigned int i) const
 {
 	if (num == 0 || i >= num)
 		throw (OutOfBounds());
