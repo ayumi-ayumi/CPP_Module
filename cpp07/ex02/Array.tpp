@@ -1,15 +1,15 @@
 template <typename T>
-Array<T>::Array(): ptr(NULL), num(0) {}
+Array<T>::Array(): _ptr(NULL), _num(0) {}
 
 template <typename T>
-Array<T>::Array(unsigned int n): ptr(new T[n]()), num(n) {} // new int() means initialize as 0(default)
+Array<T>::Array(unsigned int n): _ptr(new T[n]()), _num(n) {} // new int() means initialize as 0(default)
 
 // Copy constructor
 template <typename T>
-Array<T>::Array(const Array& other): ptr(new T[other.num]()), num(other.num)
+Array<T>::Array(const Array& other): _ptr(new T[other._num]()), _num(other._num)
 {
-	for (unsigned int i = 0; i < num; i++)
-		ptr[i] = other.ptr[i];
+	for (unsigned int i = 0; i < _num; i++)
+		_ptr[i] = other._ptr[i];
 }
 
 template <typename T>
@@ -17,13 +17,13 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 {
 	if (this != &rhs)
 	{
-		T *newPtr = new T[rhs.num]();
-		for (unsigned int i = 0; i < rhs.num; i++)
-			newPtr[i] = rhs.ptr[i];
+		T *newPtr = new T[rhs._num]();
+		for (unsigned int i = 0; i < rhs._num; i++)
+			newPtr[i] = rhs._ptr[i];
 
-		delete[] ptr;
-		ptr = newPtr;
-		num = rhs.num;
+		delete[] _ptr;
+		_ptr = newPtr;
+		_num = rhs._num;
 	}
 	return (*this);
 }
@@ -31,22 +31,22 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 template <typename T>
 T& Array<T>::operator[](unsigned int i) const
 {
-	if (num == 0 || i >= num)
+	if (_num == 0 || i >= _num)
 		throw (OutOfBounds());
 	else
-		return ptr[i];
+		return _ptr[i];
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-	delete[] ptr;
+	delete[] _ptr;
 }
 
 template <typename T>
 unsigned int Array<T>::size() const
 {
-	return (num);
+	return (_num);
 }
 
 template <typename T>

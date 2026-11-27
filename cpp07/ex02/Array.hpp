@@ -18,8 +18,8 @@ class Array
 		class OutOfBounds : public std::exception { const char* what() const throw();};
 
 	private:
-		T* ptr;
-		unsigned int num;
+		T* _ptr;
+		unsigned int _num;
 };
 
 #include "Array.tpp"
